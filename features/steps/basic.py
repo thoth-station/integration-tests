@@ -20,6 +20,7 @@
 import os
 import requests
 import time
+from datetime import timedelta
 
 from thamos.lib import advise
 from thamos.config import config
@@ -73,7 +74,11 @@ def thamos_advise(context, case, recommendation_type):
 @then("wait for adviser to finish successfully")
 def wait_for_adviser_to_finish(context):
     """Wait for submitted analysis to finish."""
+    retries = 0
     while True:
+        if retries > timedelta(minutes=45).total_seconds():
+            raise RuntimeError("Adviser analysis took too much time to finish")
+
         response = requests.get(
             f"{context.scheme}://{context.api_url}/api/v1/advise/python/{context.analysis_id}/status",
             verify=False,
@@ -84,6 +89,7 @@ def wait_for_adviser_to_finish(context):
         if exit_code is None:
             # Not finished yet.
             time.sleep(1)
+            retries += 1
             continue
 
         assert exit_code == 0, f"Analysis {context.analysis_id} run on {context.api_url} was not successful"
