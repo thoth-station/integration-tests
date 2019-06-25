@@ -2,7 +2,8 @@
 - project:
     check:
       jobs:
-        - "thoth-github-wip"
+# This only works on public repositories
+#        - "thoth-github-wip"
         - "thoth-coala"
     gate:
       queue: "thoth-station/core"
