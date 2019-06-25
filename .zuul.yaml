@@ -5,6 +5,7 @@
 # This only works on public repositories
 #        - "thoth-github-wip"
         - "thoth-coala"
+        - "thoth-behave"
     gate:
       queue: "thoth-station/core"
       jobs:
@@ -13,3 +14,11 @@
       queue: "thoth-station/core"
       jobs:
         - "thoth-coala"
+
+- job:
+    name: "thoth-behave"
+    description: |
+      This job will use behave to run some integration tests.
+    vars:
+      thoth_environment: "test"
+    run: playbooks/behave.yaml

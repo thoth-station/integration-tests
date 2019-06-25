@@ -1,0 +1,7 @@
+---
+- hosts: all
+  tasks:
+    - name: "Run integration test script"
+      command: "test.sh"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
