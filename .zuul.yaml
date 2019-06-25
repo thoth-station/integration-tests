@@ -14,7 +14,6 @@
       queue: "thoth-station/core"
       jobs:
         - "thoth-coala"
-
 - job:
     name: "thoth-behave"
     description: |
