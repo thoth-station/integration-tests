@@ -1,0 +1,14 @@
+---
+- project:
+    check:
+      jobs:
+        - "thoth-github-wip"
+        - "thoth-coala"
+    gate:
+      queue: "thoth-station/core"
+      jobs:
+        - "thoth-coala"
+    kebechet-auto-gate:
+      queue: "thoth-station/core"
+      jobs:
+        - "thoth-coala"
