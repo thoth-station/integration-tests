@@ -21,3 +21,7 @@
     vars:
       thoth_environment: "test"
     run: playbooks/behave.yaml
+    nodeset:
+      nodes:
+        - name: "pod"
+          label: "thoth-python36"
