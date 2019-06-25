@@ -16,10 +16,12 @@
         - "thoth-coala"
 - job:
     name: "thoth-behave"
+    parent: "base-openshift-pod"
     description: |
       This job will use behave to run some integration tests.
     vars:
-      thoth_environment: "test"
+      thoth_environment:
+        THOTH_USER_API_URL: "test.thoth-station.ninja"
     run: playbooks/behave.yaml
     nodeset:
       nodes:
