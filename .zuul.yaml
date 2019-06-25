@@ -1,32 +1,20 @@
----
-- project:
-    check:
-      jobs:
-# This only works on public repositories
-#        - "thoth-github-wip"
-        - "thoth-coala"
-    gate:
-      queue: "thoth-station/core"
-      jobs:
-        - "thoth-coala"
-    kebechet-auto-gate:
-      queue: "thoth-station/core"
-      jobs:
-        - "thoth-coala"
-    periodic:
-      jobs:
-        - "thoth-behave"
-
-- job:
-    name: "thoth-behave"
-    parent: "base-openshift-pod"
-    description: |
-      This job will use behave to run some integration tests.
-    vars:
-      thoth_environment:
-        THOTH_USER_API_URL: "test.thoth-station.ninja"
-    run: playbooks/behave.yaml
-    nodeset:
-      nodes:
-        - name: "pod"
-          label: "thoth-python36"
+- 
+    project:
+        check:
+            jobs:
+                - thoth-coala
+        gate:
+            queue: thoth-station/core
+            jobs:
+                - thoth-coala
+        kebechet-auto-gate:
+            queue: thoth-station/core
+            jobs:
+                - thoth-coala
+        periodic:
+            jobs:
+                - 
+                    thoth-behave:
+                        vars:
+                            thoth_environment:
+                                THOTH_USER_API_URL: test.thoth-station.ninja
