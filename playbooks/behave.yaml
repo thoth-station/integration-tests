@@ -1,0 +1,13 @@
+---
+- hosts: all
+  tasks:
+    - name: "install dependencies"
+      command: "pipenv install --deploy"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+
+    - name: "Run integration test"
+      command: "pipenv run behave --show-timings"
+      args:
+        chdir: "{{ zuul.project.src_dir }}"
+      environment: "{{ thoth_environment }}"
