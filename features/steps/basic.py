@@ -38,8 +38,9 @@ def deployment_accessible(context, scheme):
     context.scheme = scheme.lower()
     response = requests.get(f"{context.scheme}://{context.api_url}/api/v1", verify=False)
 
-    assert response.status_code == 200, \
-        f"Invalid response whn accessing User API /api/v1 endpoint: {response.status_code!r}"
+    assert (
+        response.status_code == 200
+    ), f"Invalid response whn accessing User API /api/v1 endpoint: {response.status_code!r}"
 
     assert response.text, "Empty response from server for User API /api/v1 endpoint"
 
@@ -61,13 +62,17 @@ def thamos_advise(context, case, recommendation_type):
         pipfile_lock="",
         recommendation_type=recommendation_type,
         no_static_analysis=True,
-        runtime_environment={},
+        runtime_environment={
+            "name": "rhel",
+            "operating_system": {"name": "rhel", "version": "8.0"},
+            "python_version": "3.6",
+        },
         limit_latest_versions=-1,
         nowait=True,
         force=True,
         limit=None,
         count=1,
-        debug=True
+        debug=True,
     )
 
 
@@ -80,8 +85,7 @@ def wait_for_adviser_to_finish(context):
             raise RuntimeError("Adviser analysis took too much time to finish")
 
         response = requests.get(
-            f"{context.scheme}://{context.api_url}/api/v1/advise/python/{context.analysis_id}/status",
-            verify=False,
+            f"{context.scheme}://{context.api_url}/api/v1/advise/python/{context.analysis_id}/status", verify=False,
         )
         assert response.status_code == 200
         exit_code = response.json()["status"]["exit_code"]
@@ -100,38 +104,44 @@ def wait_for_adviser_to_finish(context):
 def retrieve_advise_respond(context):
     """Retrieve analysis from Thoth using User API."""
     response = requests.get(
-        f"{context.scheme}://{context.api_url}/api/v1/advise/python/{context.analysis_id}",
-        verify=False,
+        f"{context.scheme}://{context.api_url}/api/v1/advise/python/{context.analysis_id}", verify=False,
     )
-    assert response.status_code == 200, \
-        f"Bad status code ({response.status_code}) when obtaining adviser result from {context.api_url}"
+    assert (
+        response.status_code == 200
+    ), f"Bad status code ({response.status_code}) when obtaining adviser result from {context.api_url}"
     context.adviser_result = response.json()
 
 
 @then("adviser result is has no error flag set")
 def adviser_result_error_flag(context):
     """Check that adviser analysis has no error flag set."""
-    assert context.adviser_result["result"]["error"] is False, \
-        f"Adviser run with id {context.analysis_id} was not successful: {context.adviser_result['result']['report']}"
+    assert (
+        context.adviser_result["result"]["error"] is False
+    ), f"Adviser run with id {context.analysis_id} was not successful: {context.adviser_result['result']['report']}"
 
 
 @then("adviser result has pinned down software stack with report")
 def adviser_result_has_pinned_down_software_stack(context):
     """Check presence of pinned down software stack in the computed adviser result."""
-    assert context.adviser_result["result"]["report"], \
-        f"Report field holding justification is empty for analysis {context.analysis_id}"
+    assert context.adviser_result["result"][
+        "report"
+    ], f"Report field holding justification is empty for analysis {context.analysis_id}"
 
-    assert len(context.adviser_result["result"]["report"]) == 1, \
-        f"Report should contain one software stack recommended for analysis {context.analysis_id}"
+    assert (
+        len(context.adviser_result["result"]["report"]) == 1
+    ), f"Report should contain one software stack recommended for analysis {context.analysis_id}"
 
-    assert len(context.adviser_result["result"]["report"][0]) == 3, \
-        f"Report should contain justification array and requirements, wrong analysis result for {context.analysis_id}"
+    assert (
+        len(context.adviser_result["result"]["report"][0]) == 3
+    ), f"Report should contain justification array and requirements, wrong analysis result for {context.analysis_id}"
 
     stack = context.adviser_result["result"]["report"][0][1]
 
-    assert isinstance(stack, dict), \
-        f"Expected a software stack, no output produced by adviser {context.analysis_id} " \
+    assert isinstance(stack, dict), (
+        f"Expected a software stack, no output produced by adviser {context.analysis_id} "
         f"(field in stack result is {stack})"
+    )
 
-    assert "requirements" in stack, f"No requirements available in the adviser " \
-                                    f"result for analysis {context.analysis_id}: {stack}"
+    assert "requirements" in stack, (
+        f"No requirements available in the adviser " f"result for analysis {context.analysis_id}: {stack}"
+    )
