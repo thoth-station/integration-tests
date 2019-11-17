@@ -9,6 +9,7 @@ verify_ssl = true
 thamos = "*"
 behave = "*"
 requests = "*"
+pyhamcrest = "*"
 
 [requires]
 python_version = "3.6"
