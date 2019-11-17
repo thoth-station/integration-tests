@@ -19,8 +19,16 @@
 
 import os
 import requests
+import urllib.parse
 
 from behave import given, when, then
+from hamcrest import assert_that, equal_to
+
+
+@given('I query Thoth User API for "{index}" "{package}" "{version}"')
+def step_impl(context, index: str, package: str, version: str):
+    """Retrieve metadata about Python Package."""
+    context.query_string = f"{context.scheme}://{context.api_url}/api/v1/python/package/metadata?index={urllib.parse.quote_plus(index)}&name={package}&version={version}"
 
 
 @when("I query for the list of known Python Package indices,")
@@ -30,9 +38,26 @@ def step_impl(context):
     assert (
         response.status_code == 200
     ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {context.api_url}"
-    context.adviser_result = response.json()
+    context.result = response.json()
 
 
-@then("I should get a list of two")
+@when("I execute the query")
 def step_impl(context):
-    raise NotImplementedError("STEP: Then I should get a list of two")
+    """Execute the prepared query."""
+    response = requests.get(f"{context.query_string}", verify=False,)
+    assert (
+        response.status_code == 200
+    ), f"Bad status code ({response.status_code}) when executing the query: {context.query_string}"
+
+    context.result = response.json()
+
+
+@then('I should get "{author}" and "{maintainer}"')
+def step_impl(context, author: str, maintainer: str):
+    assert_that(context.result["author"], equal_to(author))
+    assert_that(context.result["maintainer"], equal_to(maintainer))
+
+
+@then('I should get a list of "{number}"')
+def step_impl(context, number: int):
+    assert_that(len(context.result), equal_to(int(number)))
