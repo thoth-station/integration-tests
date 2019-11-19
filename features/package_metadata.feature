@@ -11,6 +11,6 @@ Feature: Querying Thoth for Python package metadata
         Then I should get "<author>" and "<maintainer>"
 
         Examples: Packages
-            | index                                                                        | package    | version | author       | maintainer       |
-            | https://pypi.org/simple                                                      | tensorflow | 2.0.0   | Google Inc.  | None             |
-            | https://tensorflow.pypi.thoth-station.ninja/index/manylinux2010/AVX2/simple/ | tensorflow | 2.0.0   | Red Hat Inc. | aicoe@redhat.com |
+            | index                                                                       | package    | version | author       | maintainer |
+            | https://pypi.org/simple                                                     | tensorflow | 2.0.0   | Google Inc.  | None       |
+            | https://tensorflow.pypi.thoth-station.ninja/index/manylinux2010/AVX2/simple | tensorflow | 2.0.0   | Red Hat Inc. | None       |
