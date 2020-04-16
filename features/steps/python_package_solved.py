@@ -20,9 +20,12 @@
 import os
 import requests
 import urllib.parse
+import logging
 
 from behave import given, when, then
 from hamcrest import assert_that, equal_to
+
+_LOGGER = logging.getLogger(__name__)
 
 
 @given("a list of packages")
@@ -59,6 +62,6 @@ def step_impl(context):
 @then("I should get the same number provided from PyPI")
 def step_impl(context):
     """Assert that all versions from PyPI are solved inside Thoth knowledge graph."""
-    print(context.result)
+    _LOGGER.info(context.result)
     for package in context.result.keys():
         assert_that(context.result[package]["number_thoth"], equal_to(context.result[package]["number_pypi"]))
