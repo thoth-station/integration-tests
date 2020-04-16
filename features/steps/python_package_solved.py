@@ -27,6 +27,7 @@ from hamcrest import assert_that, equal_to
 
 @given("a list of packages")
 def step_impl(context):
+    """Take list of python package from table."""
     context.result = {}
     for row in context.table:
         context.result[row["package_name"]] = {}
@@ -34,6 +35,7 @@ def step_impl(context):
 
 @given("number of versions for each package_name is available")
 def step_impl(context):
+    """Get number of versions available from PyPI for the package_name."""
     # TODO: check number of solvers
     thoth_solvers = 3
     for package in context.result.keys():
@@ -45,6 +47,7 @@ def step_impl(context):
 
 @when("I query for the solved packages for the package_name from PyPI in Thoth Knowledge Graph")
 def step_impl(context):
+    """Get number of versions available from PyPI for the package_name queryin Thoth knowledge graph."""
     for package in context.result.keys():
         response = requests.get(f"{context.scheme}://{context.api_url}/api/v1/python/packages/count?index={None}&name={package}&version={None}")
         context.result[package]["number_thoth"] = response.json()["count"]
@@ -52,5 +55,6 @@ def step_impl(context):
 
 @then("I should get the same number provided from PyPI")
 def step_impl(context):
+    """Assert that all versions from PyPI are solved inside Thoth knowledge graph."""
     for package in context.result.keys():
         assert_that(context.result[package]["number_thoth"], equal_to(context.result[package]["number_pypi"]))
