@@ -28,7 +28,8 @@ from hamcrest import assert_that, equal_to
 @given('I query Thoth User API for "{index}" "{package}" "{version}"')
 def step_impl(context, index: str, package: str, version: str):
     """Retrieve metadata about Python Package."""
-    context.query_string = f"{context.scheme}://{context.api_url}/api/v1/python/package/metadata?index={urllib.parse.quote_plus(index)}&name={package}&version={version}"
+    context.query_string = f"{context.scheme}://{context.api_url}/api/v1/python/package/metadata" + \
+        f"?index={urllib.parse.quote_plus(index)}&name={package}&version={version}"
 
 
 @when("I query for the list of known Python Package indices,")
@@ -54,10 +55,12 @@ def step_impl(context):
 
 @then('I should get "{author}" and "{maintainer}"')
 def step_impl(context, author: str, maintainer: str):
+    """Verify conditions for author and maintainer."""
     assert_that(context.result["author"], equal_to(author))
     assert_that(context.result["maintainer"], equal_to(maintainer))
 
 
 @then('I should get a list of "{number}"')
 def step_impl(context, number: int):
+    """Verify correct number is retrieved."""
     assert_that(len(context.result), equal_to(int(number)))

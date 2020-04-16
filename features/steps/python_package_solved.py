@@ -49,12 +49,16 @@ def step_impl(context):
 def step_impl(context):
     """Get number of versions available from PyPI for the package_name queryin Thoth knowledge graph."""
     for package in context.result.keys():
-        response = requests.get(f"{context.scheme}://{context.api_url}/api/v1/python/packages/count?index={None}&name={package}&version={None}")
+        response = requests.get(
+            f"{context.scheme}://{context.api_url}/api/v1/python/packages/count"
+            f"?index={None}&name={package}&version={None}"
+        )
         context.result[package]["number_thoth"] = response.json()["count"]
 
 
 @then("I should get the same number provided from PyPI")
 def step_impl(context):
     """Assert that all versions from PyPI are solved inside Thoth knowledge graph."""
+    print(context.result)
     for package in context.result.keys():
         assert_that(context.result[package]["number_thoth"], equal_to(context.result[package]["number_pypi"]))
