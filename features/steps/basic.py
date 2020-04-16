@@ -50,7 +50,7 @@ def deployment_accessible(context, scheme):
 
     assert (
         response.status_code == 200
-    ), f"Invalid response whn accessing Management API /api/v1 endpoint: {response.status_code!r}"
+    ), f"Invalid response when accessing Management API /api/v1 endpoint: {response.status_code!r}"
 
     assert response.text, "Empty response from server for Management API /api/v1 endpoint"
 
