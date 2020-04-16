@@ -17,16 +17,34 @@
 
 """Integration tests for Thoth deployment for solvers available."""
 
+import os
+import requests
+
+from behave import given, when, then
+from hamcrest import assert_that, contains_inanyorder
+
+
 @given(u'a set of solvers')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given a set of solvers')
+    """Take list of solvers from table."""
+    context.result = {}
+    requested_solvers = []
+    for row in context.table:
+        requested_solvers.append(row["solver_name"])
+    context.result["requested_solvers"] = requested_solvers
 
 
 @when(u'we ask if the solver is available')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When we ask if the solver is available')
+    """Retrieve available solvers."""
+    url = f"{context.scheme}://{context.management_api_url}/api/v1/solvers"
+    data = requests.get(url).json()
+    available_solvers = [str(solver["solver_name"]) for solver in data["solvers"]["python"]]
+    context.result["available_solvers"] = available_solvers
 
 
 @then(u'we should find the solver available')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then we should find the solver available')
+    """Verify all requested solvers are available."""
+    print(context.result)
+    assert_that(context.result["available_solvers"], contains_inanyorder(context.result["requested_solvers"]))

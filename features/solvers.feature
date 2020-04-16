@@ -5,6 +5,6 @@ Feature: Check for solvers available in Thoth
             | solver-rhel-8-py36 |
             | solver-fedora-31-py37 |
             | solver-fedora-31-py38 |
-
+        And deployment is accessible using HTTPS
         When we ask if the solver is available
         Then we should find the solver available

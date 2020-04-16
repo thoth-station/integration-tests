@@ -28,17 +28,17 @@ from hamcrest import assert_that, equal_to
 @given('I query Thoth User API for "{index}" "{package}" "{version}"')
 def step_impl(context, index: str, package: str, version: str):
     """Retrieve metadata about Python Package."""
-    context.query_string = f"{context.scheme}://{context.api_url}/api/v1/python/package/metadata" + \
-        f"?index={urllib.parse.quote_plus(index)}&name={package}&version={version}"
+    context.query_string = f"{context.scheme}://{context.user_api_url}/api/v1/"
+    f"python/package/metadata?index={urllib.parse.quote_plus(index)}&name={package}&version={version}"
 
 
 @when("I query for the list of known Python Package indices,")
 def step_impl(context):
     """Retrieve list of Python Package Indices known to Thoth."""
-    response = requests.get(f"{context.scheme}://{context.api_url}/api/v1/python-package-index", verify=False,)
+    response = requests.get(f"{context.scheme}://{context.user_api_url}/api/v1/python-package-index", verify=False,)
     assert (
         response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {context.api_url}"
+    ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {context.user_api_url}"
     context.result = response.json()
 
 
