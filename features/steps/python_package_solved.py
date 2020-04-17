@@ -39,13 +39,20 @@ def step_impl(context):
 @given("number of versions for each package_name is available")
 def step_impl(context):
     """Get number of versions available from PyPI for the package_name."""
-    # TODO: check number of solvers
-    thoth_solvers = 3
     for package in context.result.keys():
         url = "https://pypi.python.org/pypi/{}/json".format(package)
         data = requests.get(url).json()
         number_pypi = len(list(data["releases"].keys()))
-        context.result[package]["number_pypi"] = number_pypi*thoth_solvers
+        context.result[package]["number_pypi"] = number_pypi
+
+
+@given("number of solvers available is provided")
+def step_impl(context):
+    """Get number of solver available in Thoth."""
+    url = f"{context.scheme}://{context.management_api_url}/api/v1/solvers"
+    data = requests.get(url).json()
+    available_solvers = [str(solver["solver_name"]) for solver in data["solvers"]["python"]]
+    context.solvers_number = len(available_solvers)
 
 
 @when("I query for the solved packages for the package_name from PyPI in Thoth Knowledge Graph")
@@ -54,8 +61,9 @@ def step_impl(context):
     for package in context.result.keys():
         payload = {'name': package}
         response = requests.get(
-            f"{context.scheme}://{context.api_url}/api/v1/python/packages/count", params=payload)
+            f"{context.scheme}://{context.user_api_url}/api/v1/python/packages/count", params=payload)
         context.result[package]["number_thoth"] = response.json()["count"]
+        context.result[package]["number_pypi"] = context.result[package]["number_pypi"]*context.solvers_number
 
 
 @then("I should get the same number provided from PyPI")

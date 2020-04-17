@@ -34,7 +34,7 @@ def step_impl(context):
     context.result["requested_solvers"] = requested_solvers
 
 
-@when(u'we ask if the solvers are available')
+@when(u'we ask for the available solvers')
 def step_impl(context):
     """Retrieve available solvers."""
     url = f"{context.scheme}://{context.management_api_url}/api/v1/solvers"
@@ -43,7 +43,7 @@ def step_impl(context):
     context.result["available_solvers"] = available_solvers
 
 
-@then(u'we should find the solvers available')
+@then(u'they should include at least the given solvers')
 def step_impl(context):
     """Verify all requested solvers are available."""
     print(context.result)
