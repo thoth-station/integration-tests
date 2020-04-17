@@ -52,10 +52,9 @@ def step_impl(context):
 def step_impl(context):
     """Get number of versions available from PyPI for the package_name queryin Thoth knowledge graph."""
     for package in context.result.keys():
+        payload = {'name': package}
         response = requests.get(
-            f"{context.scheme}://{context.api_url}/api/v1/python/packages/count"
-            f"?index={None}&name={package}&version={None}"
-        )
+            f"{context.scheme}://{context.api_url}/api/v1/python/packages/count", params=payload)
         context.result[package]["number_thoth"] = response.json()["count"]
 
 
