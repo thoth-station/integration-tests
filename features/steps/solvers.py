@@ -24,7 +24,7 @@ from behave import given, when, then
 from hamcrest import assert_that, contains_inanyorder
 
 
-@given(u'a set of solvers')
+@given(u'a minimum set of solvers requested')
 def step_impl(context):
     """Take list of solvers from table."""
     context.result = {}
@@ -37,13 +37,13 @@ def step_impl(context):
 @when(u'we ask for the available solvers')
 def step_impl(context):
     """Retrieve available solvers."""
-    url = f"{context.scheme}://{context.management_api_url}/api/v1/solvers"
+    url = f"{context.scheme}://{context.management_api_host}/api/v1/solvers"
     data = requests.get(url).json()
     available_solvers = [str(solver["solver_name"]) for solver in data["solvers"]["python"]]
     context.result["available_solvers"] = available_solvers
 
 
-@then(u'they should include at least the given solvers')
+@then(u'they should include at least the minimum set of solvers')
 def step_impl(context):
     """Verify all requested solvers are available."""
     print(context.result)

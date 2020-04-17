@@ -49,7 +49,7 @@ def step_impl(context):
 @given("number of solvers available is provided")
 def step_impl(context):
     """Get number of solver available in Thoth."""
-    url = f"{context.scheme}://{context.management_api_url}/api/v1/solvers"
+    url = f"{context.scheme}://{context.management_api_host}/api/v1/solvers"
     data = requests.get(url).json()
     available_solvers = [str(solver["solver_name"]) for solver in data["solvers"]["python"]]
     context.solvers_number = len(available_solvers)

@@ -45,8 +45,8 @@ def deployment_accessible(context, scheme):
 
     assert response.text, "Empty response from server for User API /api/v1 endpoint"
 
-    context.management_api_url = os.environ["THOTH_MANAGEMENT_API_URL"]
-    response = requests.get(f"{context.scheme}://{context.management_api_url}/api/v1", verify=False)
+    context.management_api_host = os.environ["THOTH_MANAGEMENT_API_HOST"]
+    response = requests.get(f"{context.scheme}://{context.management_api_host}/api/v1", verify=False)
 
     assert (
         response.status_code == 200
