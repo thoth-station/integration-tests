@@ -25,11 +25,15 @@ from behave import given, when, then
 from hamcrest import assert_that, equal_to
 
 
-@given('I query Thoth User API for "{index}" "{package}" "{version}"')
+@when('I query Thoth User API for metadata about "{index}" "{package}" "{version}"')
 def step_impl(context, index: str, package: str, version: str):
     """Retrieve metadata about Python Package."""
     payload = {"index": index, "name": package, "version": version}
-    response = requests.get(f"{context.scheme}://{context.user_api_url}/api/v1/python/package/metadata", verify=False, params=payload)
+    response = requests.get(
+        f"{context.scheme}://{context.user_api_url}/api/v1/python/package/metadata",
+        verify=False,
+        params=payload
+    )
     assert (
             response.status_code == 200
         ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {context.user_api_url}"

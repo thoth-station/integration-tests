@@ -21,7 +21,7 @@ import os
 import requests
 
 from behave import given, when, then
-from hamcrest import assert_that, contains_inanyorder
+from hamcrest import assert_that, has_item
 
 
 @given(u'a minimum set of solvers requested')
@@ -47,4 +47,7 @@ def step_impl(context):
 def step_impl(context):
     """Verify all requested solvers are available."""
     print(context.result)
-    assert_that(context.result["available_solvers"], contains_inanyorder(context.result["requested_solvers"]))
+    requested_solvers = context.result["requested_solvers"]
+    available_solvers = context.result["available_solvers"]
+    for r_s in requested_solvers:
+        assert_that(available_solvers, has_item(r_s))
