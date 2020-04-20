@@ -29,10 +29,10 @@ from hamcrest import assert_that, equal_to
 def step_impl(context):
     """Retrieve list of Python Package Indices known to Thoth."""
     context.result = {}
-    response = requests.get(f"{context.scheme}://{context.user_api_url}/api/v1/python-package-index", verify=False,)
+    response = requests.get(f"{context.scheme}://{context.user_api_host}/api/v1/python-package-index", verify=False,)
     assert (
         response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {context.user_api_url}"
+    ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {context.user_api_host}"
     context.result["indices"] = response.json()
 
 

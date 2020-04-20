@@ -61,7 +61,7 @@ def step_impl(context):
     for package in context.result.keys():
         payload = {'name': package}
         response = requests.get(
-            f"{context.scheme}://{context.user_api_url}/api/v1/python/packages/count", params=payload)
+            f"{context.scheme}://{context.user_api_host}/api/v1/python/packages/count", params=payload)
         context.result[package]["number_thoth"] = response.json()["count"]
         context.result[package]["number_pypi"] = context.result[package]["number_pypi"]*context.solvers_number
 

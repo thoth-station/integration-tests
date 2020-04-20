@@ -28,10 +28,10 @@ from hamcrest import assert_that, equal_to, greater_than
 @when('I query the list of "{kind}" environments')
 def step_impl(context, kind: str):
     """Retrieve list of Environments of given kind."""
-    response = requests.get(f"{context.scheme}://{context.user_api_url}/api/v1/{kind}-environment", verify=False,)
+    response = requests.get(f"{context.scheme}://{context.user_api_host}/api/v1/{kind}-environment", verify=False,)
     assert (
         response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining {kind}-environement from {context.user_api_url}"
+    ), f"Bad status code ({response.status_code}) when obtaining {kind}-environement from {context.user_api_host}"
     context.result = response.json()
 
 
