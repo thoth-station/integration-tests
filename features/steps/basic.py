@@ -34,15 +34,25 @@ def deployment_accessible(context, scheme):
     if scheme not in ("HTTPS", "HTTP"):
         raise ValueError(f"Invalid scheme {scheme!r}, has to be HTTP or HTTPS")
 
-    context.api_url = os.environ["THOTH_USER_API_URL"]
+    context.user_api_host = os.environ["THOTH_USER_API_HOST"]
+
     context.scheme = scheme.lower()
-    response = requests.get(f"{context.scheme}://{context.api_url}/api/v1", verify=False)
+    response = requests.get(f"{context.scheme}://{context.user_api_host}/api/v1", verify=False)
 
     assert (
         response.status_code == 200
     ), f"Invalid response when accessing User API /api/v1 endpoint: {response.status_code!r}"
 
     assert response.text, "Empty response from server for User API /api/v1 endpoint"
+
+    context.management_api_host = os.environ["THOTH_MANAGEMENT_API_HOST"]
+    response = requests.get(f"{context.scheme}://{context.management_api_host}/api/v1", verify=False)
+
+    assert (
+        response.status_code == 200
+    ), f"Invalid response when accessing Management API /api/v1 endpoint: {response.status_code!r}"
+
+    assert response.text, "Empty response from server for Management API /api/v1 endpoint"
 
 
 @when("thamos advise is run for {case} for recommendation type {recommendation_type} asynchronously")
@@ -54,7 +64,7 @@ def thamos_advise(context, case, recommendation_type):
     with open(f"features/data/{case}/Pipfile") as case_pipfile:
         pipfile = case_pipfile.read()
 
-    config.explicit_host = context.api_url
+    config.explicit_host = context.user_api_host
     config.tls_verify = False
 
     context.analysis_id = advise(
@@ -85,7 +95,8 @@ def wait_for_adviser_to_finish(context):
             raise RuntimeError("Adviser analysis took too much time to finish")
 
         response = requests.get(
-            f"{context.scheme}://{context.api_url}/api/v1/advise/python/{context.analysis_id}/status", verify=False,
+            f"{context.scheme}://{context.user_api_host}/api/v1/"
+            f"advise/python/{context.analysis_id}/status", verify=False,
         )
         assert response.status_code == 200
         exit_code = response.json()["status"]["exit_code"]
@@ -104,11 +115,11 @@ def wait_for_adviser_to_finish(context):
 def retrieve_advise_respond(context):
     """Retrieve analysis from Thoth using User API."""
     response = requests.get(
-        f"{context.scheme}://{context.api_url}/api/v1/advise/python/{context.analysis_id}", verify=False,
+        f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}", verify=False,
     )
     assert (
         response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining adviser result from {context.api_url}"
+    ), f"Bad status code ({response.status_code}) when obtaining adviser result from {context.user_api_host}"
     context.adviser_result = response.json()
 
 
