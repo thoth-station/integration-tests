@@ -25,10 +25,10 @@ Run integration tests against stage deployment:
 
 .. code-block:: console
 
-  THOTH_USER_API_URL=stage.thoth-station.ninja ./test.sh
+  THOTH_USER_API_HOST=stage.thoth-station.ninja THOTH_MANAGEMENT_API_HOST=management.test.thoth-station.ninja ./test.sh
 
 Run integration tests against test deployment (default behaviour):
 
 .. code-block:: console
 
-  THOTH_USER_API_URL=test.thoth-station.ninja ./test.sh
+  THOTH_USER_API_HOST=test.thoth-station.ninja THOTH_MANAGEMENT_API_HOST=management.test.thoth-station.ninja ./test.sh
