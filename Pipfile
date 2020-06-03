@@ -10,6 +10,7 @@ thamos = "*"
 behave = "*"
 requests = "*"
 pyhamcrest = "*"
+thoth-storages = "*"
 
 [requires]
 python_version = "3.6"
