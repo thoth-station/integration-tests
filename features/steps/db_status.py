@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+"""Thoth DB integration test for Thoth deployment."""
+
 from thoth.storages import GraphDatabase
 from behave import given, when, then
 
@@ -23,19 +25,20 @@ graph = GraphDatabase()
 
 @when("I connect to the Database")
 def step_impl(context):
-    """Check connection to the database. """
+    """Check connection to the database."""
     try:
         graph.connect()
     except Exception:
         raise AssertionError("The connection to the Database failed.")
-    
+
+
 @then("I should get 'True' if database is connected")
 def step_impl(context):
-    """Check connection to the database. """
-    assert graph.is_connected() == True, "Connection to database failed."
+    """Check connection to the database."""
+    assert graph.is_connected(), "Connection to database failed."
 
 
 @then("I should get 'True' if schema is up-to-date")
 def step_impl(context):
-    """Check if schema is  up-to-date. """
-    assert graph.is_schema_up2date() == True, "Database schema is out of date."
+    """Check if schema is  up-to-date."""
+    assert graph.is_schema_up2date(), "Database schema is out of date."
