@@ -28,10 +28,14 @@ def step_impl(context):
         graph.connect()
     except Exception:
         raise AssertionError("The connection to the Database failed.")
+    
+@then("I should get 'True' if database is connected")
+def step_impl(context):
+    """Check connection to the database. """
     assert graph.is_connected() == True, "Connection to database failed."
 
 
-@then('I should if connected I should get "True"')
+@then("I should get 'True' if schema is up-to-date")
 def step_impl(context):
     """Check if schema is  up-to-date. """
     assert graph.is_schema_up2date() == True, "Database schema is out of date."
