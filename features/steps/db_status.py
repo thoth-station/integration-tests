@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Thoth's integration tests
-# Copyright(C) 2019 Red Hat, Inc.
+# Copyright(C) 2019, 2020 Red Hat, Inc.
 #
 # This program is free software: you can redistribute it and / or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,10 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+
 """Thoth DB integration test for Thoth deployment."""
 
+
 from thoth.storages import GraphDatabase
-from behave import given, when, then
+from behave import when, then
 
 graph = GraphDatabase()
 

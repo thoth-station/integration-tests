@@ -15,14 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+
 """Basic integration tests for Thoth deployment."""
 
-import os
-import requests
-import urllib.parse
 
-from behave import given, when, then
-from hamcrest import assert_that, equal_to, greater_than
+import requests
+
+from behave import when, then
+from hamcrest import assert_that, greater_than
 
 
 @when('I query the list of "{kind}" environments')

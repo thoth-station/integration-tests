@@ -95,8 +95,8 @@ def wait_for_adviser_to_finish(context):
             raise RuntimeError("Adviser analysis took too much time to finish")
 
         response = requests.get(
-            f"{context.scheme}://{context.user_api_host}/api/v1/"
-            f"advise/python/{context.analysis_id}/status", verify=False,
+            f"{context.scheme}://{context.user_api_host}/api/v1/" f"advise/python/{context.analysis_id}/status",
+            verify=False,
         )
         assert response.status_code == 200
         exit_code = response.json()["status"]["exit_code"]

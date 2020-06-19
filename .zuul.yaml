@@ -1,27 +1,29 @@
-- 
+-
     project:
         check:
             jobs:
-                - thoth-coala
+                - noop 
         gate:
             queue: thoth-station/core
             jobs:
-                - thoth-coala
+                - noop 
         kebechet-auto-gate:
             queue: thoth-station/core
             jobs:
-                - thoth-coala
+                - noop 
         post:
             jobs:
-                - 
+                -
                     thoth-behave:
                         vars:
                             thoth_environment:
-                                THOTH_USER_API_URL: test.thoth-station.ninja
+                                THOTH_USER_API_HOST: test.thoth-station.ninja
+                                THOTH_MANAGEMENT_API_HOST: management.test.thoth-station.ninja
         periodic:
             jobs:
-                - 
+                -
                     thoth-behave:
                         vars:
                             thoth_environment:
-                                THOTH_USER_API_URL: test.thoth-station.ninja
+                                THOTH_USER_API_HOST: test.thoth-station.ninja
+                                THOTH_MANAGEMENT_API_HOST: management.test.thoth-station.ninja

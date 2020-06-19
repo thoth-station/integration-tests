@@ -17,11 +17,9 @@
 
 """Python Package Metadata integration test for Thoth deployment."""
 
-import os
 import requests
-import urllib.parse
 
-from behave import given, when, then
+from behave import when, then
 from hamcrest import assert_that, equal_to
 
 
@@ -30,13 +28,11 @@ def step_impl(context, index: str, package: str, version: str):
     """Retrieve metadata about Python Package."""
     payload = {"index": index, "name": package, "version": version}
     response = requests.get(
-        f"{context.scheme}://{context.user_api_host}/api/v1/python/package/metadata",
-        verify=False,
-        params=payload
+        f"{context.scheme}://{context.user_api_host}/api/v1/python/package/metadata", verify=False, params=payload
     )
     assert (
-            response.status_code == 200
-        ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {context.user_api_host}"
+        response.status_code == 200
+    ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {context.user_api_host}"
     context.result = response.json()
 
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Thoth's integration tests
-# Copyright(C) 2019 Red Hat, Inc.
+# Copyright(C) 2019, 2020 Red Hat, Inc.
 #
 # This program is free software: you can redistribute it and / or modify
 # it under the terms of the GNU General Public License as published by
@@ -17,9 +17,7 @@
 
 """Python Package solved integration tests for Thoth deployment."""
 
-import os
 import requests
-import urllib.parse
 import logging
 
 from behave import given, when, then
@@ -59,11 +57,12 @@ def step_impl(context):
 def step_impl(context):
     """Get number of versions available from PyPI for the package_name queryin Thoth knowledge graph."""
     for package in context.result.keys():
-        payload = {'name': package}
+        payload = {"name": package}
         response = requests.get(
-            f"{context.scheme}://{context.user_api_host}/api/v1/python/packages/count", params=payload)
+            f"{context.scheme}://{context.user_api_host}/api/v1/python/packages/count", params=payload
+        )
         context.result[package]["number_thoth"] = response.json()["count"]
-        context.result[package]["number_pypi"] = context.result[package]["number_pypi"]*context.solvers_number
+        context.result[package]["number_pypi"] = context.result[package]["number_pypi"] * context.solvers_number
 
 
 @then("I should get the same number provided from PyPI")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Thoth's integration tests
-# Copyright(C) 2019 Red Hat, Inc.
+# Copyright(C) 2019, 2020 Red Hat, Inc.
 #
 # This program is free software: you can redistribute it and / or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,13 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+
 """Thoth indices integration test for Thoth deployment."""
 
-import os
-import requests
-import urllib.parse
 
-from behave import given, when, then
+import requests
+
+from behave import when, then
 from hamcrest import assert_that, equal_to
 
 

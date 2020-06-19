@@ -34,7 +34,7 @@ Run integration tests against test deployment (default behaviour):
 
   THOTH_USER_API_HOST=test.thoth-station.ninja THOTH_MANAGEMENT_API_HOST=management.test.thoth-station.ninja ./test.sh
 
-If you want to run a single feature test - 
+If you want to run a single feature test -
 .. code-block:: console
 
   behave -i <feature name>.feature

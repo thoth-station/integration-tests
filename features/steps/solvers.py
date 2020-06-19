@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Thoth's integration tests
-# Copyright(C) 2019 Red Hat, Inc.
+# Copyright(C) 2019, 2020 Red Hat, Inc.
 #
 # This program is free software: you can redistribute it and / or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,16 +15,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+
 """Integration tests for Thoth deployment for solvers available."""
 
-import os
+
 import requests
 
 from behave import given, when, then
 from hamcrest import assert_that, has_item
 
 
-@given(u'a minimum set of solvers requested')
+@given("a minimum set of solvers requested")
 def step_impl(context):
     """Take list of solvers from table."""
     context.result = {}
@@ -34,7 +35,7 @@ def step_impl(context):
     context.result["requested_solvers"] = requested_solvers
 
 
-@when(u'we ask for the available solvers')
+@when("we ask for the available solvers")
 def step_impl(context):
     """Retrieve available solvers."""
     url = f"{context.scheme}://{context.management_api_host}/api/v1/solvers"
@@ -43,7 +44,7 @@ def step_impl(context):
     context.result["available_solvers"] = available_solvers
 
 
-@then(u'they should include at least the minimum set of solvers')
+@then("they should include at least the minimum set of solvers")
 def step_impl(context):
     """Verify all requested solvers are available."""
     print(context.result)
