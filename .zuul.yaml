@@ -2,15 +2,15 @@
     project:
         check:
             jobs:
-                - noop 
+                - noop
         gate:
             queue: thoth-station/core
             jobs:
-                - noop 
+                - noop
         kebechet-auto-gate:
             queue: thoth-station/core
             jobs:
-                - noop 
+                - noop
         post:
             jobs:
                 -
