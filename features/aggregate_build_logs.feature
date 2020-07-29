@@ -1,4 +1,3 @@
-@wip
 Feature: Aggregating Build Logs
     Scenario: Browsing logs of container images builds during Amun inspection jobs
         Given amun service is accessible using HTTP
