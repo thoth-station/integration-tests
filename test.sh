@@ -6,6 +6,8 @@ export THOTH_AMUN_API_HOST=${THOTH_AMUN_API_HOST:-amun-api-thoth-test-core.apps.
 
 echo -e "------------------------------------------------------------------\n\n"
 echo "> Tests are executed against User API at $THOTH_USER_API_HOST"
+echo "> Tests are executed against Management API at $THOTH_MANAGEMENT_API_HOST"
+echo "> Tests are executed against Amun API at $THOTH_AMUN_API_HOST"
 echo -e "\n\n------------------------------------------------------------------\n\n"
 
 export PIPENV_HIDE_EMOJIS=1
