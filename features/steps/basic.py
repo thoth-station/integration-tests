@@ -77,7 +77,6 @@ def thamos_advise(context, case, recommendation_type):
             "operating_system": {"name": "rhel", "version": "8.0"},
             "python_version": "3.6",
         },
-        limit_latest_versions=-1,
         nowait=True,
         force=True,
         limit=None,
