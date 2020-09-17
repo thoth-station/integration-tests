@@ -17,6 +17,7 @@ The command above will trigger installation of all the necessary libraries and e
 
 * THOTH_USER_API_HOST - the HOST to deployment where User API sits
 * THOTH_MANAGEMENT_API_HOST - the HOST to deployment where Management API sits
+* THOTH_AMUN_API_HOST - the HOST to deployment where Amun API sits
 * NO_INSTALL - do not install dependencies (expects that the `pipenv install` command was already issued)
 
 Examples
@@ -26,13 +27,13 @@ Run integration tests against stage deployment:
 
 .. code-block:: console
 
-  THOTH_USER_API_HOST=stage.thoth-station.ninja THOTH_MANAGEMENT_API_HOST=management.stage.thoth-station.ninja ./test.sh
+  THOTH_USER_API_HOST=stage.thoth-station.ninja THOTH_MANAGEMENT_API_HOST=management.stage.thoth-station.ninja THOTH_AMUN_API_HOST=amun.stage.thoth-station.ninja ./test.sh
 
 Run integration tests against test deployment (default behaviour):
 
 .. code-block:: console
 
-  THOTH_USER_API_HOST=test.thoth-station.ninja THOTH_MANAGEMENT_API_HOST=management.test.thoth-station.ninja ./test.sh
+  THOTH_USER_API_HOST=test.thoth-station.ninja THOTH_MANAGEMENT_API_HOST=management.test.thoth-station.ninja THOTH_AMUN_API_HOST=amun.test.thoth-station.ninja ./test.sh
 
 If you want to run a single feature test -
 .. code-block:: console
