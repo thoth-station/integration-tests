@@ -95,6 +95,7 @@
         },
         "boto3": {
             "hashes": [
+                "sha256:5f3969dd167b787e5bc6742afbfe15e149051d8c6aa1edaa4858133384f64ec7",
                 "sha256:713da2b28e9e4cd77e922690c97935dd2316ab27635b6bab4745a2d42bd887ec"
             ],
             "version": "==1.15.11"
@@ -700,11 +701,11 @@
         },
         "thoth-storages": {
             "hashes": [
-                "sha256:057c092d8895b6a04298944764061caee949ea9d0a68771de65eae56d862cdb6",
-                "sha256:edc10b7aebe66303a0da935a6f12c70100e18ca30cce24c248bacb76c8ec22d6"
+                "sha256:affd10622661e41e35ac6ca1a5916966e8cdd33be518ced5690a64891092735e",
+                "sha256:e9d27957e6816dbebf5a4760f7c7f1a5feb0aec416cf393b7b5381e5ad551cf3"
             ],
             "index": "pypi",
-            "version": "==0.25.14"
+            "version": "==0.25.15"
         },
         "toml": {
             "hashes": [
@@ -775,10 +776,10 @@
         },
         "yaspin": {
             "hashes": [
-                "sha256:97f4a08af09f14890cb7bad584327182716a758728bfd12ad73176e6955661da",
-                "sha256:ff3e157a9b04a3f3ec0b30905fc2bfee921f55d87ad34a2e260ce0c2160d3b07"
+                "sha256:069614d9aeb97a1c0fddf5ea86bf260f3a296f5dff4d97388a23d7b91c4858ef",
+                "sha256:550657d4a337b0959cf1d7ed7354ccb672e7da9f9b142a55d158d129f48e3f5e"
             ],
-            "version": "==1.0.0"
+            "version": "==1.1.0"
         }
     },
     "develop": {}
