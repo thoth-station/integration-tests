@@ -98,15 +98,16 @@ def wait_for_adviser_to_finish(context):
             verify=False,
         )
         assert response.status_code == 200
-        exit_code = response.json()["status"]["exit_code"]
+        finished_at = response.json()["status"]["finished_at"]
 
-        if exit_code is None:
+        if finished_at is None:
             # Not finished yet.
             time.sleep(1)
             retries += 1
             continue
 
-        assert exit_code == 0, f"Analysis {context.analysis_id} run on {context.api_url} was not successful"
+        state = response.json()["status"]["state"]
+        assert state == "succeeded", f"Analysis {context.analysis_id} run on {context.api_url} was not successful"
         break
 
 
