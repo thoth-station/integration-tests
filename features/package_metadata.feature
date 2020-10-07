@@ -2,7 +2,7 @@ Feature: Querying Thoth for Python package metadata
     Scenario: Querying for the known Python Package Indices
         Given deployment is accessible using HTTPS
         When I query for the list of known Python Package indices
-        Then I should get a list of "2"
+        Then I should get a list of at least "2" Python Package indices
 
     Scenario Outline: Query for metadata for different indices for TensorFlow
         Given deployment is accessible using HTTPS

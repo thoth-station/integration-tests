@@ -22,7 +22,7 @@
 import requests
 
 from behave import when, then
-from hamcrest import assert_that, equal_to
+from hamcrest import assert_that, greater_than_or_equal_to
 
 
 @when("I query for the list of known Python Package indices")
@@ -36,7 +36,7 @@ def step_impl(context):
     context.result["indices"] = response.json()
 
 
-@then('I should get a list of "{number}"')
+@then('I should get a list of at least "{number}" Python Package indices')
 def step_impl(context, number: int):
     """Verify correct number is retrieved."""
-    assert_that(len(context.result["indices"]), equal_to(int(number)))
+    assert_that(len(context.result["indices"]), greater_than_or_equal_to(int(number)))
