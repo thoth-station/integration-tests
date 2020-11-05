@@ -20,19 +20,9 @@
 
 
 import requests
+import re
 
-from behave import given, when, then
-from hamcrest import assert_that, has_item
-
-
-@given("a minimum set of solvers requested")
-def step_impl(context):
-    """Take list of solvers from table."""
-    context.result = {}
-    requested_solvers = []
-    for row in context.table:
-        requested_solvers.append(row["solver_name"])
-    context.result["requested_solvers"] = requested_solvers
+from behave import when, then
 
 
 @when("we ask for the available solvers")
@@ -47,8 +37,6 @@ def step_impl(context):
 @then("they should include at least the minimum set of solvers")
 def step_impl(context):
     """Verify all requested solvers are available."""
-    print(context.result)
-    requested_solvers = context.result["requested_solvers"]
     available_solvers = context.result["available_solvers"]
-    for r_s in requested_solvers:
-        assert_that(available_solvers, has_item(r_s))
+    for a_s in available_solvers:
+        assert re.match("solver-(rhel|fedora)-.*\d-py3\d", a_s)  # noqa: W605
