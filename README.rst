@@ -18,6 +18,7 @@ The command above will trigger installation of all the necessary libraries and e
 * THOTH_USER_API_HOST - the HOST to deployment where User API sits
 * THOTH_MANAGEMENT_API_HOST - the HOST to deployment where Management API sits
 * THOTH_AMUN_API_HOST - the HOST to deployment where Amun API sits
+* THOTH_MANAGEMENT_API_SECRET - the secret to schedule solver analysis
 * NO_INSTALL - do not install dependencies (expects that the `pipenv install` command was already issued)
 
 Examples

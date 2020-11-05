@@ -38,6 +38,8 @@ def deployment_accessible(context, scheme):
 
     context.user_api_host = os.environ["THOTH_USER_API_HOST"]
 
+    context.management_api_secret = os.environ["THOTH_MANAGEMENT_API_SECRET"]
+
     context.scheme = scheme.lower()
     response = requests.get(f"{context.scheme}://{context.user_api_host}/api/v1", verify=False)
 
