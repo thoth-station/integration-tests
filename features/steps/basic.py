@@ -34,6 +34,8 @@ def deployment_accessible(context, scheme):
     if scheme not in ("HTTPS", "HTTP"):
         raise ValueError(f"Invalid scheme {scheme!r}, has to be HTTP or HTTPS")
 
+    context.result = {}
+
     context.user_api_host = os.environ["THOTH_USER_API_HOST"]
 
     context.scheme = scheme.lower()
