@@ -14,4 +14,4 @@ export PIPENV_HIDE_EMOJIS=1
 export PIPENV_COLORBLIND=1
 
 [[ $NO_INSTALL -eq "1" ]] || pipenv install --deploy
-pipenv --verbose run behave --show-timings
+pipenv --verbose run behave --tags=~@local-test-only --show-timings
