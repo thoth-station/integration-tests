@@ -21,6 +21,8 @@
 
 import requests
 import re
+import time
+from datetime import timedelta
 
 from behave import when, then
 
@@ -40,3 +42,45 @@ def step_impl(context):
     available_solvers = context.result["available_solvers"]
     for a_s in available_solvers:
         assert re.match("solver-(rhel|fedora)-.*\d-py3\d", a_s)  # noqa: W605
+
+
+@then("schedule solver analyses for package {package_name} with version {package_version}")
+def step_impl(context, package_name, package_version):
+    """Schedule solver jobs for all available solvers."""
+    url = f"{context.scheme}://{context.management_api_host}/api/v1/solver/python"
+    response = requests.post(
+        url,
+        json={"package_name": package_name, "version_specifier": "==" + package_version},
+        params={"secret": context.management_api_secret},
+    )
+
+    assert (
+        response.status_code == 202
+    ), f"Invalid response when scheduling analysis for the given Python package: {response.status_code!r}"
+
+    context.analysis_id = response.json()["analysis_id"]
+
+
+@then("wait for analyses to finish successfully")
+def step_impl(context):
+    """Wait for scheduled sovlers to finish."""
+    for a_i in context.analysis_id:
+        url = f"{context.scheme}://{context.management_api_host}/api/v1/solver/python/" + a_i + "/status"
+        retries = 0
+        while True:
+            if retries > timedelta(minutes=45).total_seconds():
+                raise RuntimeError("Solver job took too much time to finish")
+
+            response = requests.get(url)
+            assert (
+                response.status_code == 200
+            ), f"Bad status code ({response.status_code}) when obtaining status for analysis_id {a_i}"
+            result = response.json()
+            state = result["status"]["state"]
+            if state in ["running", "pending"]:
+                time.sleep(1)
+                retries += 1
+                continue
+
+            assert state == "finished", f"Solver {a_i} run on {context.management_api_host} was not successful"
+            break
