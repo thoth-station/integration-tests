@@ -26,3 +26,4 @@ sed -i 1s,.\*,host:\ ${E2E_TEST_API}, .thoth.yaml
 # and get an advise...
 thamos version
 thamos advise --force
+thamos provenance-check --force
