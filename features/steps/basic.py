@@ -111,7 +111,7 @@ def wait_for_adviser_to_finish(context):
             continue
 
         state = response.json()["status"]["state"]
-        assert state == "succeeded", f"Analysis {context.analysis_id} run on {context.api_url} was not successful"
+        assert state == "succeeded", f"Analysis {context.analysis_id} run on {context.user_api_host} was not successful"
         break
 
 
