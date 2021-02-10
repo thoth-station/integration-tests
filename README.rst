@@ -15,11 +15,11 @@ The integration testsuite is written in `behave <https://behave.readthedocs.io/>
 
 The command above will trigger installation of all the necessary libraries and executing the test-suite in a virtual environment. By default, test environment is tested with integration tests. The script above can be parametrized using the following environment variables:
 
-* THOTH_USER_API_HOST - the HOST to deployment where User API sits
-* THOTH_MANAGEMENT_API_HOST - the HOST to deployment where Management API sits
-* THOTH_AMUN_API_HOST - the HOST to deployment where Amun API sits
-* THOTH_MANAGEMENT_API_SECRET - the secret to schedule solver analysis
-* NO_INSTALL - do not install dependencies (expects that the `pipenv install` command was already issued)
+* ``THOTH_USER_API_HOST`` - the HOST to deployment where User API sits
+* ``THOTH_MANAGEMENT_API_HOST`` - the HOST to deployment where Management API sits
+* ``THOTH_AMUN_API_HOST`` - the HOST to deployment where Amun API sits
+* ``THOTH_MANAGEMENT_API_SECRET`` - the secret to schedule solver analysis
+* ``NO_INSTALL`` - do not install dependencies (expects that the `pipenv install` command was already issued)
 
 Examples
 ========
