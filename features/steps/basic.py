@@ -115,9 +115,7 @@ def wait_for_adviser_to_finish(context):
 @then("I should be able to retrieve adviser results")
 def retrieve_advise_respond(context):
     """Retrieve analysis from Thoth using User API."""
-    response = requests.get(
-        f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}",
-    )
+    response = requests.get(f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}")
     assert (
         response.status_code == 200
     ), f"Bad status code ({response.status_code}) when obtaining adviser result from {context.user_api_host}"
