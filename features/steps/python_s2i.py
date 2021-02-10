@@ -22,9 +22,6 @@ import requests
 from behave import when
 from behave import then
 
-"""
-"""
-
 
 @when("I query for the list of available Thoth s2i container images on User API")
 def step_impl(context):
@@ -62,4 +59,3 @@ def step_impl(context, count: str):
     assert len(context.result["s2i"]) == int(
         count
     ), f"Expected {count} Python Thoth s2i registered, got {len(context.result['s2i'])} instead"
-
