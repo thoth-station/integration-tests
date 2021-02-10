@@ -28,7 +28,7 @@ def step_impl(context, index: str, package: str, version: str):
     """Retrieve metadata about Python Package."""
     payload = {"index": index, "name": package, "version": version}
     response = requests.get(
-        f"{context.scheme}://{context.user_api_host}/api/v1/python/package/metadata", verify=False, params=payload
+        f"{context.scheme}://{context.user_api_host}/api/v1/python/package/metadata", params=payload
     )
     assert (
         response.status_code == 200

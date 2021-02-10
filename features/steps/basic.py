@@ -41,7 +41,7 @@ def deployment_accessible(context, scheme):
     context.management_api_secret = os.environ["THOTH_MANAGEMENT_API_SECRET"]
 
     context.scheme = scheme.lower()
-    response = requests.get(f"{context.scheme}://{context.user_api_host}/api/v1", verify=False)
+    response = requests.get(f"{context.scheme}://{context.user_api_host}/api/v1")
 
     assert (
         response.status_code == 200
@@ -50,7 +50,7 @@ def deployment_accessible(context, scheme):
     assert response.text, "Empty response from server for User API /api/v1 endpoint"
 
     context.management_api_host = os.environ["THOTH_MANAGEMENT_API_HOST"]
-    response = requests.get(f"{context.scheme}://{context.management_api_host}/api/v1", verify=False)
+    response = requests.get(f"{context.scheme}://{context.management_api_host}/api/v1")
 
     assert (
         response.status_code == 200
@@ -69,8 +69,6 @@ def thamos_advise(context, case, recommendation_type):
         pipfile = case_pipfile.read()
 
     config.explicit_host = context.user_api_host
-    config.tls_verify = False
-
     context.analysis_id = advise(
         pipfile=pipfile,
         pipfile_lock="",
@@ -99,7 +97,6 @@ def wait_for_adviser_to_finish(context):
 
         response = requests.get(
             f"{context.scheme}://{context.user_api_host}/api/v1/" f"advise/python/{context.analysis_id}/status",
-            verify=False,
         )
         assert response.status_code == 200
         finished_at = response.json()["status"]["finished_at"]
@@ -119,7 +116,7 @@ def wait_for_adviser_to_finish(context):
 def retrieve_advise_respond(context):
     """Retrieve analysis from Thoth using User API."""
     response = requests.get(
-        f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}", verify=False,
+        f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}",
     )
     assert (
         response.status_code == 200

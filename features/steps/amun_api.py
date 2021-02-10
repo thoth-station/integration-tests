@@ -47,7 +47,7 @@ def amun_accessible(context, scheme):
 
     scheme = scheme.lower()
     context.amun_api_host = f"{scheme}://{os.environ['THOTH_AMUN_API_HOST']}/api/v1"
-    response = requests.get(context.amun_api_host, verify=False)
+    response = requests.get(context.amun_api_host)
 
     assert (
         response.status_code == 200
