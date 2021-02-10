@@ -112,8 +112,11 @@ def wait_for_adviser_to_finish(context):
         url = f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}/status"
         response = requests.get(url)
 
-        state = response.json()["status"]["state"]
-        assert state == "succeeded", f"Analysis {context.analysis_id} run on {context.user_api_host} was not successful"
+        status = response.json()["status"]
+        assert "terminated" in status
+        assert (
+            "terminated" in status["terminated"]["reason"] == "Completed"
+        ), f"Analysis {context.analysis_id} was not successful: {status}"
         break
 
 
