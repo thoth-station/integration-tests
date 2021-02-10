@@ -137,9 +137,10 @@ def adviser_result_error_flag(context):
         context.adviser_result["result"]["error"] is False
     ), f"Adviser run with id {context.analysis_id} was not successful: {context.adviser_result}"
 
-    assert (
-        context.adviser_result["result"]["error_msg"] is None
-    ), f"Adviser run with id {context.analysis_id} was has error message set: {context.adviser_result['result']['error_msg']}"
+    assert context.adviser_result["result"]["error_msg"] is None, (
+        f"Adviser run with id {context.analysis_id} was has error message set: "
+        f"{context.adviser_result['result']['error_msg']}"
+    )
 
 
 @then("adviser result has pinned down software stack with report")
