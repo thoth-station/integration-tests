@@ -95,20 +95,28 @@ def wait_for_adviser_to_finish(context):
         if retries > timedelta(minutes=45).total_seconds():
             raise RuntimeError("Adviser analysis took too much time to finish")
 
-        response = requests.get(
-            f"{context.scheme}://{context.user_api_host}/api/v1/" f"advise/python/{context.analysis_id}/status",
-        )
-        assert response.status_code == 200
-        finished_at = response.json()["status"]["finished_at"]
+        url = f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}"
+        response = requests.get(url)
 
-        if finished_at is None:
+        assert response.status_code in (
+            200,
+            202,
+        ), f"Error in HTTP status code {response.status_code} for {url!r}: {response.text}"
+
+        if response.status_code == 202:
             # Not finished yet.
             time.sleep(1)
             retries += 1
             continue
 
-        state = response.json()["status"]["state"]
-        assert state == "succeeded", f"Analysis {context.analysis_id} run on {context.user_api_host} was not successful"
+        url = f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}/status"
+        response = requests.get(url)
+
+        status = response.json()["status"]
+        assert "terminated" in status
+        assert (
+            "terminated" in status["terminated"]["reason"] == "Completed"
+        ), f"Analysis {context.analysis_id} was not successful: {status}"
         break
 
 
