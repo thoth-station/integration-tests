@@ -115,7 +115,7 @@ def wait_for_adviser_to_finish(context):
         status = response.json()["status"]
         assert "terminated" in status
         assert (
-            "terminated" in status["terminated"]["reason"] == "Completed"
+            status["terminated"]["reason"] == "Completed"
         ), f"Analysis {context.analysis_id} was not successful: {status}"
         break
 
@@ -135,7 +135,11 @@ def adviser_result_error_flag(context):
     """Check that adviser analysis has no error flag set."""
     assert (
         context.adviser_result["result"]["error"] is False
-    ), f"Adviser run with id {context.analysis_id} was not successful: {context.adviser_result['result']['report']}"
+    ), f"Adviser run with id {context.analysis_id} was not successful: {context.adviser_result}"
+
+    assert (
+        context.adviser_result["result"]["error_msg"] is None
+    ), f"Adviser run with id {context.analysis_id} was has error message set: {context.adviser_result['result']['error_msg']}"
 
 
 @then("adviser result has pinned down software stack with report")
@@ -146,20 +150,33 @@ def adviser_result_has_pinned_down_software_stack(context):
     ], f"Report field holding justification is empty for analysis {context.analysis_id}"
 
     assert (
-        len(context.adviser_result["result"]["report"]) == 1
+        len(context.adviser_result["result"]["report"]["products"]) == 1
     ), f"Report should contain one software stack recommended for analysis {context.analysis_id}"
 
     assert (
-        len(context.adviser_result["result"]["report"][0]) == 3
-    ), f"Report should contain justification array and requirements, wrong analysis result for {context.analysis_id}"
-
-    stack = context.adviser_result["result"]["report"][0][1]
-
-    assert isinstance(stack, dict), (
-        f"Expected a software stack, no output produced by adviser {context.analysis_id} "
-        f"(field in stack result is {stack})"
-    )
-
-    assert "requirements" in stack, (
-        f"No requirements available in the adviser " f"result for analysis {context.analysis_id}: {stack}"
-    )
+        "stack_info" in context.adviser_result["result"]["report"]
+    ), f"Report should container stack information for {context.analysis_id}"
+    assert (
+        "justification" in context.adviser_result["result"]["report"]["products"][0]
+    ), f"Report should contain justification for {context.analysis_id}"
+    assert (
+        "advised_manifest_changes" in context.adviser_result["result"]["report"]["products"][0]
+    ), f"Report should contain advised manifest changes for {context.analysis_id}"
+    assert (
+        "advised_runtime_environment" in context.adviser_result["result"]["report"]["products"][0]
+    ), f"Report should contain advised runtime environment for {context.analysis_id}"
+    assert (
+        "project" in context.adviser_result["result"]["report"]["products"][0]
+    ), f"Report should contain project information for {context.analysis_id}"
+    assert (
+        "requirements" in context.adviser_result["result"]["report"]["products"][0]["project"]
+    ), f"Report should contain requirements information for {context.analysis_id}"
+    assert (
+        "requirements_locked" in context.adviser_result["result"]["report"]["products"][0]["project"]
+    ), f"Report should contain requirements_locked information for {context.analysis_id}"
+    assert (
+        "runtime_environment" in context.adviser_result["result"]["report"]["products"][0]["project"]
+    ), f"Report should contain runtime environment information for {context.analysis_id}"
+    assert (
+        "score" in context.adviser_result["result"]["report"]["products"][0]
+    ), f"Report should contain score information for {context.analysis_id}"
