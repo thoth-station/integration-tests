@@ -36,7 +36,7 @@ def step_impl(context, index: str, package: str, version: str):
         response.status_code == 200
     ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {url}"
 
-    context.result = response.json()
+    context.result = response.json()["metadata"]
 
 
 @then('I should get "{author}" and "{maintainer}"')
@@ -56,7 +56,7 @@ def step_impl(context, package_name: str, version: str, index: str):
         response.status_code == 200
     ), f"Bad status code ({response.status_code}) when obtaining dependencies from {url}"
 
-    context.dependencies = response.json()
+    context.dependencies = response.json()["dependencies"]
 
 
 @then("I should see {dependencies} in the dependency listing")

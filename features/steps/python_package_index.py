@@ -36,7 +36,7 @@ def step_impl(context):
         f"Bad status code ({response.status_code}) when obtaining " f"python-package-index from {url}: {response.text}"
     )
 
-    context.result["indexes"] = response.json()
+    context.result["indexes"] = response.json()["indexes"]
 
 
 @then("I query for the Python Package indexes on Management API")
