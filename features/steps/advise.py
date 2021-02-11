@@ -31,8 +31,11 @@ from behave import when
 _RECOMMENDATION_TYPES = frozenset({"TESTING", "STABLE", "LATEST", "PERFORMANCE", "SECURITY",})
 
 
-@when("thamos advise is run for {case} for recommendation type {recommendation_type} asynchronously")
-def thamos_advise(context, case, recommendation_type):
+@when(
+    "thamos advise is run for {case} for recommendation type {recommendation_type} for "
+    "Python {python_version} asynchronously"
+)
+def thamos_advise(context, case: str, recommendation_type: str, python_version: str):
     """Call library function from Thamos to submit analysis to Thoth."""
     if recommendation_type not in _RECOMMENDATION_TYPES:
         assert False, f"Invalid recommendation type {recommendation_type!r}, accepted: {list(_RECOMMENDATION_TYPES)}"
@@ -57,7 +60,7 @@ def thamos_advise(context, case, recommendation_type):
         runtime_environment={
             "name": "rhel",
             "operating_system": {"name": "rhel", "version": "8.0"},
-            "python_version": "3.6",
+            "python_version": python_version,
         },
         nowait=True,
         force=True,
