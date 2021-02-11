@@ -82,7 +82,12 @@ def step_impl(context, dependencies: str):
 def step_impl(context, package_name: str):
     """Query User API for versions of a package."""
     url = f"{context.scheme}://{context.user_api_host}/api/v1/python/package/versions"
-    response = requests.get(url, params={"name": package_name,},)
+    response = requests.get(
+        url,
+        params={
+            "name": package_name,
+        },
+    )
 
     assert (
         response.status_code == 200
