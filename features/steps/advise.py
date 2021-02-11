@@ -28,7 +28,15 @@ from thamos.config import config
 from behave import then
 from behave import when
 
-_RECOMMENDATION_TYPES = frozenset({"TESTING", "STABLE", "LATEST", "PERFORMANCE", "SECURITY",})
+_RECOMMENDATION_TYPES = frozenset(
+    {
+        "TESTING",
+        "STABLE",
+        "LATEST",
+        "PERFORMANCE",
+        "SECURITY",
+    }
+)
 
 
 @when(

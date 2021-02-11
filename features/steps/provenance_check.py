@@ -38,7 +38,10 @@ def step_impl(context, provenance_check_case: str):
     original_dir = os.getcwd()
     try:
         os.chdir(project_dir)
-        context.analysis_id = provenance_check_here(nowait=True, force=True,)
+        context.analysis_id = provenance_check_here(
+            nowait=True,
+            force=True,
+        )
     finally:
         os.chdir(original_dir)
 
