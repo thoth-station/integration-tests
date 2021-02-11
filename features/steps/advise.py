@@ -25,7 +25,6 @@ from datetime import timedelta
 from thamos.lib import advise
 from thamos.config import config
 
-from behave import given
 from behave import then
 from behave import when
 

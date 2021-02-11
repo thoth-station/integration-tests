@@ -19,13 +19,8 @@
 
 import os
 import requests
-import time
-from datetime import timedelta
 
-from thamos.lib import advise
-from thamos.config import config
-
-from behave import given, when, then
+from behave import given
 
 
 @given("deployment is accessible using {scheme}")

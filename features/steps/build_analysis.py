@@ -27,7 +27,8 @@ from behave import then
 
 
 @when(
-    "I trigger build analysis for a build using {base_image} as a base, {output_image} as a resulting container image with {buildlog}"
+    "I trigger build analysis for a build using {base_image} as a base, {output_image} as a "
+    "resulting container image with {buildlog}"
 )
 def step_impl(context, base_image: str, output_image: str, buildlog: str):
     """Trigger build analysis."""
@@ -82,7 +83,10 @@ def step_impl(context):
     if not context.build_analysis["base_image_analysis"]:
         return
 
-    url = f"{context.scheme}://{context.user_api_host}/api/v1/analyze/{context.build_analysis['base_image_analysis']['analysis_id']}"
+    url = (
+        f"{context.scheme}://{context.user_api_host}/api/v1/analyze/"
+        f"{context.build_analysis['base_image_analysis']['analysis_id']}"
+    )
     response = requests.get(url)
 
     assert response.status_code in (
@@ -97,7 +101,10 @@ def step_impl(context):
     if not context.build_analysis["output_image_analysis"]:
         return
 
-    url = f"{context.scheme}://{context.user_api_host}/api/v1/analyze/{context.build_analysis['output_image_analysis']['analysis_id']}"
+    url = (
+        f"{context.scheme}://{context.user_api_host}/api/v1/analyze/"
+        f"{context.build_analysis['output_image_analysis']['analysis_id']}"
+    )
     response = requests.get(url)
 
     assert response.status_code in (
