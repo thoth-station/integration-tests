@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-"""Basic integration tests for Thoth deployment."""
+"""Integration tests related to Thamos advise - using thamos library."""
 
 import os
 import requests
@@ -25,53 +25,40 @@ from datetime import timedelta
 from thamos.lib import advise
 from thamos.config import config
 
-from behave import given, when, then
+from behave import given
+from behave import then
+from behave import when
 
-
-@given("deployment is accessible using {scheme}")
-def deployment_accessible(context, scheme):
-    """Check the deployment is accessible using HTTP or HTTPS."""
-    if scheme not in ("HTTPS", "HTTP"):
-        raise ValueError(f"Invalid scheme {scheme!r}, has to be HTTP or HTTPS")
-
-    context.result = {}
-
-    context.user_api_host = os.environ["THOTH_USER_API_HOST"]
-
-    context.management_api_secret = os.environ["THOTH_MANAGEMENT_API_SECRET"]
-
-    context.scheme = scheme.lower()
-    response = requests.get(f"{context.scheme}://{context.user_api_host}/api/v1")
-
-    assert (
-        response.status_code == 200
-    ), f"Invalid response when accessing User API /api/v1 endpoint: {response.status_code!r}"
-
-    assert response.text, "Empty response from server for User API /api/v1 endpoint"
-
-    context.management_api_host = os.environ["THOTH_MANAGEMENT_API_HOST"]
-    response = requests.get(f"{context.scheme}://{context.management_api_host}/api/v1")
-
-    assert (
-        response.status_code == 200
-    ), f"Invalid response when accessing Management API /api/v1 endpoint: {response.status_code!r}"
-
-    assert response.text, "Empty response from server for Management API /api/v1 endpoint"
+_RECOMMENDATION_TYPES = frozenset({
+    "TESTING",
+    "STABLE",
+    "LATEST",
+    "PERFORMANCE",
+    "SECURITY",
+})
 
 
 @when("thamos advise is run for {case} for recommendation type {recommendation_type} asynchronously")
 def thamos_advise(context, case, recommendation_type):
     """Call library function from Thamos to submit analysis to Thoth."""
-    if recommendation_type not in ("TESTING", "STABLE", "LATEST"):
-        raise ValueError(f"Invalid recommendation type {recommendation_type}")
+    if recommendation_type not in _RECOMMENDATION_TYPES:
+        assert False, f"Invalid recommendation type {recommendation_type!r}, accepted: {list(_RECOMMENDATION_TYPES)}"
 
-    with open(f"features/data/{case}/Pipfile") as case_pipfile:
+    project_dir = os.path.join("features", "data", case)
+
+    with open(os.path.join(project_dir, "Pipfile")) as case_pipfile:
         pipfile = case_pipfile.read()
+
+    pipfile_lock = ""
+    pipfile_lock_path = os.path.join(project_dir, "Pipfile.lock")
+    if os.path.isfile(pipfile_lock_path):
+        with open(pipfile_lock_path) as case_pipfile_lock:
+            pipfile_lock = case_pipfile_lock.read()
 
     config.explicit_host = context.user_api_host
     context.analysis_id = advise(
         pipfile=pipfile,
-        pipfile_lock="",
+        pipfile_lock=pipfile_lock,
         recommendation_type=recommendation_type,
         no_static_analysis=True,
         runtime_environment={
