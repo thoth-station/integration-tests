@@ -1,0 +1,5 @@
+{
+    "apiversion": "apis/build.openshift.io/v1/namespaces/$NAMESPACE/builds",
+    "kind": "BuildLog",
+    "log": "Collecting tensorflow Downloading tensorflow-1.4.1-cp36-cp36m-manylinux1_x86_64.whl (41.2MB) Successfully installed tensorflow-1.4.1\n"
+}

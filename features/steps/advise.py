@@ -25,7 +25,6 @@ from datetime import timedelta
 from thamos.lib import advise
 from thamos.config import config
 
-from behave import given
 from behave import then
 from behave import when
 
@@ -38,7 +37,7 @@ def thamos_advise(context, case, recommendation_type):
     if recommendation_type not in _RECOMMENDATION_TYPES:
         assert False, f"Invalid recommendation type {recommendation_type!r}, accepted: {list(_RECOMMENDATION_TYPES)}"
 
-    project_dir = os.path.join("features", "data", case)
+    project_dir = os.path.join("features", "data", "project", case)
 
     with open(os.path.join(project_dir, "Pipfile")) as case_pipfile:
         pipfile = case_pipfile.read()
