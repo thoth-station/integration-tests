@@ -29,13 +29,7 @@ from behave import given
 from behave import then
 from behave import when
 
-_RECOMMENDATION_TYPES = frozenset({
-    "TESTING",
-    "STABLE",
-    "LATEST",
-    "PERFORMANCE",
-    "SECURITY",
-})
+_RECOMMENDATION_TYPES = frozenset({"TESTING", "STABLE", "LATEST", "PERFORMANCE", "SECURITY",})
 
 
 @when("thamos advise is run for {case} for recommendation type {recommendation_type} asynchronously")
@@ -168,3 +162,17 @@ def adviser_result_has_pinned_down_software_stack(context):
     assert (
         "score" in context.adviser_result["result"]["report"]["products"][0]
     ), f"Report should contain score information for {context.analysis_id}"
+
+
+@then("I should be able to access adviser logs")
+def step_impl(context):
+    """Access adviser logs."""
+    response = requests.get(
+        f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}/log"
+    )
+    assert (
+        response.status_code == 200
+    ), f"Bad status code ({response.status_code}) when obtaining adviser result from {context.user_api_host}"
+
+    assert "log" in response.json(), f"No log information in the response: {response.json()}"
+    assert response.json()["log"], "No logs available"
