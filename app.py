@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/
 
-"""Send e-mail report, used to send reports to our mailing list."""
+"""Run integration tests and send e-mail report, used to send reports to our mailing list."""
 
 from behave.__main__ import main as behave_main
 from datetime import date
