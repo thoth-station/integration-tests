@@ -37,15 +37,15 @@ def _create_email_subject() -> str:
 
 def send_email() -> None:
     """Send e-mail with begave test reports."""
-    with open(_BEHAVE_REPORT_FILE, 'r') as fp:
+    with open(_BEHAVE_REPORT_FILE, "r") as fp:
         msg = MIMEText(fp.read(), "html")
 
-    msg['Subject'] = _create_email_subject()
-    msg['From'] = _EMAIL_FROM
-    msg['To'] = _EMAIL_TO
+    msg["Subject"] = _create_email_subject()
+    msg["From"] = _EMAIL_FROM
+    msg["To"] = _EMAIL_TO
 
     s = smtplib.SMTP(_EMAIL_SMTP_SERVER)
-    s.sendmail(msg['From'], [msg['To']], msg.as_string())
+    s.sendmail(msg["From"], [msg["To"]], msg.as_string())
     s.quit()
 
 
