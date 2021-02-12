@@ -27,7 +27,7 @@ import sys
 _BEHAVE_REPORT_FILE = "behave-report.html"
 _DEPLOYMENT_NAME = os.getenv("THOTH_DEPLOYMENT_NAME", "N/A")
 _EMAIL_SMTP_SERVER = os.getenv("THOTH_EMAIL_SMTP_SERVER", "smtp.corp.redhat.com")
-_EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "fpokorny@redhat.com")
+_EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "aicoe-thoth-devops@redhat.com")
 _EMAIL_FROM = os.getenv("THOTH_EMAIL_FROM", "noreply@redhat.com")
 _MAIL_REPORT = bool(int(os.getenv("MAIL_REPORT", 0)))
 _BEHAVE_HTML_REPORT = "behave-report.html"
