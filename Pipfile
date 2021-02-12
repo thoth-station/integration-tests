@@ -12,6 +12,7 @@ requests = "*"
 pyhamcrest = "*"
 thoth-storages = "*"
 amun = "*"
+behave-html-formatter = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.8"
