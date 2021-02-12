@@ -20,3 +20,23 @@
 ### Improvements
 * Add scenarios related to testing Python platform listing (#87)
 * Enable TLS verification when running integration tests
+
+## Release 0.4.0 (2021-02-12T16:39:11)
+### Features
+* Send integration-test results to aicoe-thoth-devops (#110)
+* Turn integration-tests into Thoth Python s2i application (#109)
+* Bump black version
+* Provide Python version parameter to advise scenario
+* Use scenario outline for similar advise tests
+* Introduce scenario for provenance check
+* Make sure adviser logs are accessible
+* Introduce tests related to container image analysis
+* Update formatting in README
+* Package indexes are now tested by Package Index scenario
+### Bug Fixes
+* pre-commit related fixes
+### Improvements
+* Adjust integration tests based on adjusted responses
+* Add tests for obtaining versions and dependencies of packages
+* Add tests for build analyses
+* Refactor integration tests for advise
