@@ -35,12 +35,14 @@ _BEHAVE_HTML_REPORT = "behave-report.html"
 
 def _print_info() -> None:
     """Print test information."""
-    print(f"""--------------------------------------------------------------------------------
+    print(
+        f"""--------------------------------------------------------------------------------
 > Tests are executed against {_DEPLOYMENT_NAME} deployment
 > Tests are executed against User API at {os.getenv('THOTH_USER_API_HOST')}
 > Tests are executed against Management API at {os.getenv('THOTH_MANAGEMENT_API_HOST')}
 > Tests are executed against Amun API at {os.getenv('THOTH_AMUN_API_HOST')}
---------------------------------------------------------------------------------""")
+--------------------------------------------------------------------------------"""
+    )
 
 
 def _create_email_subject() -> str:
@@ -64,7 +66,7 @@ def send_email() -> None:
 
 
 def main() -> None:
-    """Main entry-point for s2i based integration tests."""
+    """Run main entry-point for s2i based integration tests."""
     args = ["--show-timings"]
     if _MAIL_REPORT:
         args.extend(["-f", "html", "-o", "behave-report.html"])
