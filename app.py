@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/
 
-"""Send e-mail report, used to send reports to our mailing list."""
+"""Run integration tests and send e-mail report, used to send reports to our mailing list."""
 
 from behave.__main__ import main as behave_main
 from datetime import date
@@ -27,7 +27,7 @@ import sys
 _BEHAVE_REPORT_FILE = "behave-report.html"
 _DEPLOYMENT_NAME = os.getenv("THOTH_DEPLOYMENT_NAME", "N/A")
 _EMAIL_SMTP_SERVER = os.getenv("THOTH_EMAIL_SMTP_SERVER", "smtp.corp.redhat.com")
-_EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "fpokorny@redhat.com")
+_EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "aicoe-thoth-devops@redhat.com")
 _EMAIL_FROM = os.getenv("THOTH_EMAIL_FROM", "noreply@redhat.com")
 _MAIL_REPORT = bool(int(os.getenv("MAIL_REPORT", 0)))
 _BEHAVE_HTML_REPORT = "behave-report.html"
