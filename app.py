@@ -17,16 +17,30 @@
 
 """Send e-mail report, used to send reports to our mailing list."""
 
+from behave.__main__ import main as behave_main
 from datetime import date
 from email.mime.text import MIMEText
 import os
 import smtplib
+import sys
 
 _BEHAVE_REPORT_FILE = "behave-report.html"
 _DEPLOYMENT_NAME = os.getenv("THOTH_DEPLOYMENT_NAME", "N/A")
 _EMAIL_SMTP_SERVER = os.getenv("THOTH_EMAIL_SMTP_SERVER", "smtp.corp.redhat.com")
-_EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "aicoe-thoth@redhat.com")
+_EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "fpokorny@redhat.com")
 _EMAIL_FROM = os.getenv("THOTH_EMAIL_FROM", "noreply@redhat.com")
+_MAIL_REPORT = bool(int(os.getenv("MAIL_REPORT", 0)))
+_BEHAVE_HTML_REPORT = "behave-report.html"
+
+
+def _print_info() -> None:
+    """Print test information."""
+    print(f"""--------------------------------------------------------------------------------
+> Tests are executed against {_DEPLOYMENT_NAME} deployment
+> Tests are executed against User API at {os.getenv('THOTH_USER_API_HOST')}
+> Tests are executed against Management API at {os.getenv('THOTH_MANAGEMENT_API_HOST')}
+> Tests are executed against Amun API at {os.getenv('THOTH_AMUN_API_HOST')}
+--------------------------------------------------------------------------------""")
 
 
 def _create_email_subject() -> str:
@@ -49,4 +63,21 @@ def send_email() -> None:
     s.quit()
 
 
-__name__ == "__main__" and send_email()
+def main() -> None:
+    """Main entry-point for s2i based integration tests."""
+    args = ["--show-timings"]
+    if _MAIL_REPORT:
+        args.extend(["-f", "html", "-o", "behave-report.html"])
+
+    # Pass any additional arguments to behave.
+    args.extend(sys.argv[1:])
+
+    _print_info()
+
+    behave_main(args)
+
+    if _MAIL_REPORT:
+        send_email()
+
+
+__name__ == "__main__" and main()
