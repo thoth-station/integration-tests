@@ -25,7 +25,7 @@ import smtplib
 _BEHAVE_REPORT_FILE = "behave-report.html"
 _DEPLOYMENT_NAME = os.getenv("THOTH_DEPLOYMENT_NAME", "N/A")
 _EMAIL_SMTP_SERVER = os.getenv("THOTH_EMAIL_SMTP_SERVER", "smtp.corp.redhat.com")
-_EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "fpokorny@redhat.com")
+_EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "aicoe-thoth@redhat.com")
 _EMAIL_FROM = os.getenv("THOTH_EMAIL_FROM", "noreply@redhat.com")
 
 
