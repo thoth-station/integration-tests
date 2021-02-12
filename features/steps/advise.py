@@ -27,6 +27,7 @@ import time
 from thamos.config import config
 from thamos.lib import advise
 from thamos.lib import advise_here
+from thamos.lib import get_log
 import git
 
 from behave import then
@@ -223,5 +224,11 @@ def step_impl(context, runtime_environment: str):
         )
 
         assert isinstance(results, tuple)
-        assert results[1] is False, f"An error was encountered during the advise: {results[1]}"
+
+        if results[1] is True:
+            with open(".thoth_last_analysis_id", "r") as f:
+                analysis_id = f.readline().strip()
+
+            assert False, f"An error was encountered during the advise:\n{get_log(analysis_id)}"
+
         context.adviser_result = {"result": results[0]}
