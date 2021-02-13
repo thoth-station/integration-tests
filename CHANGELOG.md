@@ -40,3 +40,7 @@
 * Add tests for obtaining versions and dependencies of packages
 * Add tests for build analyses
 * Refactor integration tests for advise
+
+## Release 0.5.0 (2021-02-13T09:57:40)
+### Improvements
+* Implement scenarios for testing an advise on a Git repo (#113)
