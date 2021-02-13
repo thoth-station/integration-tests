@@ -17,13 +17,18 @@
 
 """Integration tests related to Thamos advise - using thamos library."""
 
+from datetime import timedelta
+import contextlib
 import os
 import requests
+import tempfile
 import time
-from datetime import timedelta
 
-from thamos.lib import advise
 from thamos.config import config
+from thamos.lib import advise
+from thamos.lib import advise_here
+from thamos.lib import get_log
+import git
 
 from behave import then
 from behave import when
@@ -37,6 +42,17 @@ _RECOMMENDATION_TYPES = frozenset(
         "SECURITY",
     }
 )
+
+
+@contextlib.contextmanager
+def cwd(path):
+    """Change working directory in push-pop manner."""
+    work_dir = os.getcwd()
+    try:
+        os.chdir(path)
+        yield
+    finally:
+        os.chdir(work_dir)
 
 
 @when(
@@ -186,3 +202,33 @@ def step_impl(context):
 
     assert "log" in response.json(), f"No log information in the response: {response.json()}"
     assert response.json()["log"], "No logs available"
+
+
+@when("clone {git_repo} with Thoth application")
+def step_impl(context, git_repo: str):
+    """Clone the given repo."""
+    context.repo = git.Repo.clone_from(git_repo, tempfile.mkdtemp(), depth=1)
+    assert ".thoth.yaml" in os.listdir(context.repo.working_tree_dir), "No .thoth.yaml present in the git root"
+
+
+@then("I ask for an advise for the cloned application for runtime environment {runtime_environment}")
+def step_impl(context, runtime_environment: str):
+    """Ask for an advise using thamos cli."""
+    config.explicit_host = context.user_api_host
+    with cwd(context.repo.working_tree_dir):
+        results = advise_here(
+            runtime_environment_name=runtime_environment,
+            no_static_analysis=True,
+            no_user_stack=True,
+            force=False,
+        )
+
+        assert isinstance(results, tuple)
+
+        if results[1] is True:
+            with open(".thoth_last_analysis_id", "r") as f:
+                analysis_id = f.readline().strip()
+
+            assert False, f"An error was encountered during the advise:\n{get_log(analysis_id)}"
+
+        context.adviser_result = {"result": results[0]}
