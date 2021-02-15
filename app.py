@@ -20,6 +20,8 @@
 from behave.__main__ import main as behave_main
 from datetime import date
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 import os
 import smtplib
 import sys
@@ -53,12 +55,18 @@ def _create_email_subject() -> str:
 
 def send_email() -> None:
     """Send e-mail with begave test reports."""
+    msg = MIMEMultipart()
     with open(_BEHAVE_REPORT_FILE, "r") as fp:
-        msg = MIMEText(fp.read(), "html")
+        report = fp.read()
 
     msg["Subject"] = _create_email_subject()
     msg["From"] = _EMAIL_FROM
     msg["To"] = _EMAIL_TO
+    msg.attach(MIMEText(report, "html"))  # Message body.
+
+    attachment = MIMEApplication(report, _subtype="html")
+    attachment.add_header("content-disposition", "attachment", filename=_BEHAVE_REPORT_FILE)
+    msg.attach(attachment)
 
     s = smtplib.SMTP(_EMAIL_SMTP_SERVER)
     s.sendmail(msg["From"], [msg["To"]], msg.as_string())
