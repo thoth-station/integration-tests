@@ -16,12 +16,12 @@ Feature: Running thamos advise against deployment
      Scenario Outline: Run thamos advise on a Git repo
         Given deployment is accessible using HTTPS
         When clone <git_repo> with Thoth application
-        Then I ask for an advise for the cloned application for runtime environment <runtime_environment>
+        Then I ask for an advise for the cloned application for runtime environment <runtime_environment>, <user_stack> user stack supplied and <static_analysis> static analysis
         Then I should be able to see results of advise in the cloned application
         Then adviser result has pinned down software stack with report
 
         Examples: Advise
-            | git_repo                                                             | runtime_environment     |
-            | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | download_dataset        |
-            | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | training                |
-            | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | test_model              |
+            | git_repo                                                             | runtime_environment     | user_stack  | static_analysis |
+            | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | download_dataset        | without     | without         |
+            | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | training                | without     | with            |
+            | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | test_model              | with        | without         |
