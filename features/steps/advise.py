@@ -211,15 +211,30 @@ def step_impl(context, git_repo: str):
     assert ".thoth.yaml" in os.listdir(context.repo.working_tree_dir), "No .thoth.yaml present in the git root"
 
 
-@then("I ask for an advise for the cloned application for runtime environment {runtime_environment}")
-def step_impl(context, runtime_environment: str):
+@then(
+    "I ask for an advise for the cloned application for runtime environment {runtime_environment}, "
+    "{user_stack} user stack supplied and {static_analysis} static analysis"
+)
+def step_impl(context, runtime_environment: str, user_stack: str, static_analysis: str):
     """Ask for an advise using thamos cli."""
+    assert user_stack in (
+        "with",
+        "without",
+    ), "Wrong configuration of test, user stack should be configured using 'with'/'without'"
+    assert static_analysis in (
+        "with",
+        "without",
+    ), "Wrong configuration of test, static analysis should be configured using 'with'/'without'"
+
+    no_user_stack = user_stack == "without"
+    no_static_analysis = static_analysis == "without"
+
     config.explicit_host = context.user_api_host
     with cwd(context.repo.working_tree_dir):
         results = advise_here(
             runtime_environment_name=runtime_environment,
-            no_static_analysis=True,
-            no_user_stack=True,
+            no_static_analysis=no_static_analysis,
+            no_user_stack=no_user_stack,
             force=False,
         )
 
