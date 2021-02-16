@@ -44,3 +44,9 @@
 ## Release 0.5.0 (2021-02-13T09:57:40)
 ### Improvements
 * Implement scenarios for testing an advise on a Git repo (#113)
+
+## Release 0.6.0 (2021-02-16T20:14:58)
+### Features
+* Send the report as attachment (#118)
+### Improvements
+* Configure advise scenario to send user stack and code analysis (#119)
