@@ -70,9 +70,9 @@ def step_impl(context):
         response = requests.get(url)
 
         status = response.json()["status"]
-        assert "terminated" in status
+        assert "state" in status
         assert (
-            status["terminated"]["reason"] == "Completed"
+            status["state"] == "terminated"
         ), f"Container image analysis {context.analysis_id} was not successful: {status}"
         break
 
