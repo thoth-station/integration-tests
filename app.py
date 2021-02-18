@@ -26,6 +26,8 @@ import os
 import smtplib
 import sys
 
+__version__ = "0.6.0"
+
 _BEHAVE_REPORT_FILE = "behave-report.html"
 _DEPLOYMENT_NAME = os.getenv("THOTH_DEPLOYMENT_NAME", "N/A")
 _EMAIL_SMTP_SERVER = os.getenv("THOTH_EMAIL_SMTP_SERVER", "smtp.corp.redhat.com")
@@ -50,7 +52,7 @@ def _print_info() -> None:
 def _create_email_subject() -> str:
     """Create e-mail subject."""
     today = date.today()
-    return f"Integration tests update for {_DEPLOYMENT_NAME} ({today.strftime('%Y-%m-%d')})"
+    return f"Integration tests update for {_DEPLOYMENT_NAME} ({today.strftime('%Y-%m-%d')} version {__version__})"
 
 
 def send_email() -> None:
