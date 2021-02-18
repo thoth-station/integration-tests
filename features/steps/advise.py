@@ -120,10 +120,8 @@ def wait_for_adviser_to_finish(context):
         response = requests.get(url)
 
         status = response.json()["status"]
-        assert "terminated" in status
-        assert (
-            status["terminated"]["reason"] == "Completed"
-        ), f"Analysis {context.analysis_id} was not successful: {status}"
+        assert "state" in status
+        assert status["state"] == "terminated", f"Analysis {context.analysis_id} was not successful: {status}"
         break
 
 
