@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -o errexit
+trap 'echo "Aborting due to errexit on line $LINENO. Exit code: $?" >&2' ERR
+set -o errtrace
+set -o pipefail
+
+_report_destination=${ARTIFACTS:-/dev/null}
+
+micropipenv install --dev
+GENERATE_REPORT=1 MAIL_REPORT=0 ./app.py
+
+cp behave-report.html ${_report_destination}
+
+#end.

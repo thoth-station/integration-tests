@@ -33,6 +33,7 @@ _DEPLOYMENT_NAME = os.getenv("THOTH_DEPLOYMENT_NAME", "N/A")
 _EMAIL_SMTP_SERVER = os.getenv("THOTH_EMAIL_SMTP_SERVER", "smtp.corp.redhat.com")
 _EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "aicoe-thoth-devops@redhat.com")
 _EMAIL_FROM = os.getenv("THOTH_EMAIL_FROM", "noreply@redhat.com")
+_GENERATE_REPORT = bool(int(os.getenv("GENERATE_REPORT", 0)))
 _MAIL_REPORT = bool(int(os.getenv("MAIL_REPORT", 0)))
 _BEHAVE_HTML_REPORT = "behave-report.html"
 
@@ -78,7 +79,7 @@ def send_email() -> None:
 def main() -> None:
     """Run main entry-point for s2i based integration tests."""
     args = ["--show-timings"]
-    if _MAIL_REPORT:
+    if _GENERATE_REPORT:
         args.extend(["-f", "html", "-o", "behave-report.html"])
 
     # Pass any additional arguments to behave.
@@ -88,7 +89,7 @@ def main() -> None:
 
     behave_main(args)
 
-    if _MAIL_REPORT:
+    if _GENERATE_REPORT and _MAIL_REPORT:
         send_email()
 
 
