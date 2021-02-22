@@ -34,6 +34,7 @@ _EMAIL_SMTP_SERVER = os.getenv("THOTH_EMAIL_SMTP_SERVER", "smtp.corp.redhat.com"
 _EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "aicoe-thoth-devops@redhat.com")
 _EMAIL_FROM = os.getenv("THOTH_EMAIL_FROM", "noreply@redhat.com")
 _MAIL_REPORT = bool(int(os.getenv("MAIL_REPORT", 0)))
+_TAGS = os.getenv("THOTH_INTEGRATION_TESTS_TAGS")
 _BEHAVE_HTML_REPORT = "behave-report.html"
 
 
@@ -81,10 +82,14 @@ def main() -> None:
     if _MAIL_REPORT:
         args.extend(["-f", "html", "-o", "behave-report.html"])
 
+    if _TAGS:
+        args.extend(["--tags", _TAGS])
+
     # Pass any additional arguments to behave.
     args.extend(sys.argv[1:])
 
     _print_info()
+    print("Tests are executed using", args, file=sys.stderr)
 
     behave_main(args)
 
