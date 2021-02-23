@@ -94,13 +94,15 @@ def main() -> None:
     _print_info()
     print("Tests are executed using", args, file=sys.stderr)
 
-    behave_main(args)
+    exit_code = behave_main(args)
 
     if _GENERATE_REPORT and _MAIL_REPORT:
         send_email()
 
     if _ARTIFACTS_DIRECTORY is not None:
         shutil.copy(_BEHAVE_HTML_REPORT, _ARTIFACTS_DIRECTORY)
+
+    sys.exit(exit_code)
 
 
 __name__ == "__main__" and main()
