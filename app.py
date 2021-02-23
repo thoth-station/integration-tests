@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/
 
-"""Run integration tests and send e-mail report, used to send reports to our mailing list."""
+"""Run integration tests and send e-mail report or save in an artifact directory."""
 
 from behave.__main__ import main as behave_main
 from datetime import date
@@ -25,6 +25,7 @@ from email.mime.application import MIMEApplication
 import os
 import smtplib
 import sys
+import shutil
 
 __version__ = "0.6.0"
 
@@ -33,9 +34,11 @@ _DEPLOYMENT_NAME = os.getenv("THOTH_DEPLOYMENT_NAME", "N/A")
 _EMAIL_SMTP_SERVER = os.getenv("THOTH_EMAIL_SMTP_SERVER", "smtp.corp.redhat.com")
 _EMAIL_TO = os.getenv("THOTH_EMAIL_TO", "aicoe-thoth-devops@redhat.com")
 _EMAIL_FROM = os.getenv("THOTH_EMAIL_FROM", "noreply@redhat.com")
+_GENERATE_REPORT = bool(int(os.getenv("GENERATE_REPORT", 0)))
 _MAIL_REPORT = bool(int(os.getenv("MAIL_REPORT", 0)))
 _TAGS = os.getenv("THOTH_INTEGRATION_TESTS_TAGS")
 _BEHAVE_HTML_REPORT = "behave-report.html"
+_ARTIFACTS_DIRECTORY = os.getenv("ARTIFACTS", None)
 
 
 def _print_info() -> None:
@@ -79,7 +82,7 @@ def send_email() -> None:
 def main() -> None:
     """Run main entry-point for s2i based integration tests."""
     args = ["--show-timings"]
-    if _MAIL_REPORT:
+    if _GENERATE_REPORT:
         args.extend(["-f", "html", "-o", "behave-report.html"])
 
     if _TAGS:
@@ -93,8 +96,11 @@ def main() -> None:
 
     behave_main(args)
 
-    if _MAIL_REPORT:
+    if _GENERATE_REPORT and _MAIL_REPORT:
         send_email()
+
+    if _ARTIFACTS_DIRECTORY is not None:
+        shutil.copy(_BEHAVE_HTML_REPORT, _ARTIFACTS_DIRECTORY)
 
 
 __name__ == "__main__" and main()
