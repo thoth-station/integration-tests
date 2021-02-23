@@ -50,3 +50,19 @@
 * Send the report as attachment (#118)
 ### Improvements
 * Configure advise scenario to send user stack and code analysis (#119)
+
+## Release 0.7.0 (2021-02-23T08:44:13)
+### Features
+* Monitor OCP CI analysis repo
+* remove the run script
+* Remove test model from elyra-aidevsecops-tutorial
+* Provide support for tags passed
+* Adjust listing of submitted advises from integration-tests
+* Include integration-tests version in e-mail subject (#134)
+* Use proper status response (#133)
+* :arrow_up: Automatic update of dependencies by Kebechet (#127)
+* :arrow_up: Automatic update of dependencies by Kebechet (#124)
+* :arrow_up: Automatic update of dependencies by Kebechet (#123)
+### Improvements
+* use python app to copy behave report to ARTIFACT directory
+* add script to install dependencies and run integration test
