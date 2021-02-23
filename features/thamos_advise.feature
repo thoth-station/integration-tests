@@ -27,3 +27,4 @@ Feature: Running thamos advise against deployment
             | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | download-dataset        | without     | without         |
             | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | training                | without     | without         |
             | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | inference               | without     | without         |
+            | https://github.com/aicoe-aiops/ocp-ci-analysis                       | rhel:8                  | without     | without         |
