@@ -1,4 +1,6 @@
 Feature: Build analysis
+
+    @seizes_middletier_namespace
     Scenario Outline: Analyze a container image
         Given deployment is accessible using HTTPS
         When I trigger build analysis for a build using <base_image> as a base, <output_image> as a resulting container image with <buildlog>

@@ -1,5 +1,6 @@
 Feature: Provenance checks of Python software stacks
 
+    @seizes_backend_namespace
     Scenario Outline: Run provenance check for a Python software stack
         Given deployment is accessible using HTTPS
         When thamos provenance-check is run for <provenance_check_case> asynchronously

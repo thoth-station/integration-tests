@@ -1,5 +1,6 @@
 Feature: Running thamos advise against deployment
 
+      @seizes_backend_namespace
       Scenario Outline: Run thamos advise on an application stack
           Given deployment is accessible using HTTPS
           When thamos advise is run for <case> for recommendation type <recommendation_type> for Python <python_version> asynchronously
@@ -13,6 +14,7 @@ Feature: Running thamos advise against deployment
               | flask_py36                |  LATEST                 |  3.6            |
               | rhods                     |  STABLE                 |  3.8            |
 
+     @seizes_backend_namespace
      Scenario Outline: Run thamos advise on a Git repo
         Given deployment is accessible using HTTPS
         When clone <git_repo> with Thoth application

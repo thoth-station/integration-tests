@@ -1,4 +1,6 @@
 Feature: Container image analysis
+
+    @seizes_middletier_namespace
     Scenario Outline: Analyze a container image
         Given deployment is accessible using HTTPS
         When I trigger container image analysis for <container_image> with force set to <force>
