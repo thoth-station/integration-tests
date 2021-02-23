@@ -32,6 +32,7 @@ _DEPLOYMENT_INFO_KEYS = frozenset(
         "middletier_namespace",
         "s3_bucket_prefix",
         "s3_endpoint_url",
+        "amun_inspection_namespace",
         # "version",
     }
 )
