@@ -34,7 +34,7 @@ def step_impl(context, index: str, package: str, version: str):
 
     assert (
         response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {url}"
+    ), f"Bad status code ({response.status_code}) when obtaining python-package-index from {url}: {response.text}"
 
     context.result = response.json()["metadata"]
 
@@ -91,7 +91,7 @@ def step_impl(context, package_name: str):
 
     assert (
         response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining dependencies from {url}"
+    ), f"Bad status code ({response.status_code}) when obtaining dependencies from {url}: {response.text}"
 
     assert "versions" in response.json(), "No version key provided in the endpoint request"
     context.package_versions = response.json()["versions"]
