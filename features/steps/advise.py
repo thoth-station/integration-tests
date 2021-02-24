@@ -229,12 +229,15 @@ def step_impl(context, runtime_environment: str, user_stack: str, static_analysi
 
     config.explicit_host = context.user_api_host
     with cwd(context.repo.working_tree_dir):
-        results = advise_here(
-            runtime_environment_name=runtime_environment,
-            no_static_analysis=no_static_analysis,
-            no_user_stack=no_user_stack,
-            force=False,
-        )
+        try:
+            results = advise_here(
+                runtime_environment_name=runtime_environment,
+                no_static_analysis=no_static_analysis,
+                no_user_stack=no_user_stack,
+                force=False,
+            )
+        finally:
+            config._configuration = None  # TODO: substitute with config.reset_config() once new thamos is released
 
         assert isinstance(results, tuple)
 
