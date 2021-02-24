@@ -237,7 +237,7 @@ def step_impl(context, runtime_environment: str, user_stack: str, static_analysi
                 force=False,
             )
         finally:
-            config._configuration = None  # TODO: substitute with config.reset_config() once new thamos is released
+            config.reset_config()
 
         assert isinstance(results, tuple)
 
