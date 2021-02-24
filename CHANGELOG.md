@@ -66,3 +66,12 @@
 ### Improvements
 * use python app to copy behave report to ARTIFACT directory
 * add script to install dependencies and run integration test
+
+## Release 0.7.1 (2021-02-24T14:21:16)
+### Features
+* Reset config once advise_here is done
+* Adjust versions available for requests
+* Be more verbose if metadata feature fails
+* :arrow_up: Automatic update of dependencies by Kebechet
+* Reintroduce README file in the repo
+* :arrow_up: Automatic update of dependencies by Kebechet
