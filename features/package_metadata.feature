@@ -27,4 +27,4 @@ Feature: Querying Thoth for Python package metadata
         Examples: Packages
             | package_name    | versions                    |
             | tensorflow      | 2.2.0,2.3.0                 |
-            | requests        | 2.11.0,0.8.5                |
+            | requests        | 2.12.5,0.8.4                |
