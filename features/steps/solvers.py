@@ -54,9 +54,10 @@ def step_impl(context, package_name, package_version):
         params={"secret": context.management_api_secret},
     )
 
-    assert (
-        response.status_code == 202
-    ), f"Invalid response when scheduling analysis for the given Python package: {response.status_code!r}"
+    assert response.status_code == 202, (
+        f"Invalid response when scheduling analysis for the given "
+        f"Python package: {response.status_code!r}: {response.text}"
+    )
 
     context.analysis_id = response.json()["analysis_id"]
 
@@ -74,7 +75,7 @@ def step_impl(context):
             response = requests.get(url)
             assert (
                 response.status_code == 200
-            ), f"Bad status code ({response.status_code}) when obtaining status for analysis_id {a_i}"
+            ), f"Bad status code ({response.status_code}) when obtaining status for analysis_id {a_i}: {response.text}"
             result = response.json()
             state = result["status"]["state"]
             if state in ["running", "pending"]:

@@ -129,9 +129,10 @@ def wait_for_adviser_to_finish(context):
 def retrieve_advise_respond(context):
     """Retrieve analysis from Thoth using User API."""
     response = requests.get(f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}")
-    assert (
-        response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining adviser result from {context.user_api_host}"
+    assert response.status_code == 200, (
+        f"Bad status code ({response.status_code}) when obtaining adviser result from "
+        f"{context.user_api_host}: {response.text}"
+    )
     context.adviser_result = response.json()
 
 
@@ -194,9 +195,10 @@ def step_impl(context):
     response = requests.get(
         f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}/log"
     )
-    assert (
-        response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining adviser result from {context.user_api_host}"
+    assert response.status_code == 200, (
+        f"Bad status code ({response.status_code}) when obtaining adviser result "
+        f"from {context.user_api_host}: {response.text}"
+    )
 
     assert "log" in response.json(), f"No log information in the response: {response.json()}"
     assert response.json()["log"], "No logs available"

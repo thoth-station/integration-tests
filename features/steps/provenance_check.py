@@ -87,9 +87,10 @@ def step_impl(context):
     response = requests.get(
         f"{context.scheme}://{context.user_api_host}/api/v1/provenance/python/{context.analysis_id}"
     )
-    assert (
-        response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining adviser result from {context.user_api_host}"
+    assert response.status_code == 200, (
+        f"Bad status code ({response.status_code}) when obtaining adviser "
+        f"result from {context.user_api_host}: {response.text}"
+    )
     context.provenance_result = response.json()
 
 

@@ -54,7 +54,7 @@ def step_impl(context, package_name: str, version: str, index: str):
 
     assert (
         response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining dependencies from {url}"
+    ), f"Bad status code ({response.status_code}) when obtaining dependencies from {url}: {response.text}"
 
     context.dependencies = response.json()["dependencies"]
 
