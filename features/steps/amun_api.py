@@ -51,7 +51,7 @@ def amun_accessible(context, scheme):
 
     assert (
         response.status_code == 200
-    ), f"Invalid response when accessing Amun API /api/v1 endpoint: {response.status_code!r}"
+    ), f"Invalid response when accessing Amun API /api/v1 endpoint: {response.status_code!r}: {response.text}"
 
     assert response.text, "Empty response from server for Amun API /api/v1 endpoint"
 
