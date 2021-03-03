@@ -229,6 +229,7 @@ def step_impl(context, runtime_environment: str, user_stack: str, static_analysi
     no_user_stack = user_stack == "without"
     no_static_analysis = static_analysis == "without"
 
+    config._configuration = None  # TODO: substitute with config.reset_config() once new thamos is released
     config.explicit_host = context.user_api_host
     with cwd(context.repo.working_tree_dir):
         try:
