@@ -1,0 +1,11 @@
+{
+  "hardware": {
+    "cpu_family": null,
+    "cpu_model": null
+  },
+  "operating_system": {
+    "name": "rhel",
+    "version": "8"
+  },
+  "python_version": "3.8"
+}

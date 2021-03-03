@@ -15,6 +15,8 @@ amun = "*"
 behave-html-formatter = "*"
 gitpython = "*"
 pyyaml = "*"
+pytoml = "*"
+thoth-common = "*"
 
 [requires]
 python_version = "3.8"

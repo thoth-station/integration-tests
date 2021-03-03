@@ -1,0 +1,27 @@
+{
+  "base": "quay.io/thoth-station/s2i-thoth-ubi8-py38:latest",
+  "batch_size": 1,
+  "build": {
+    "requests": {
+      "cpu": "1",
+      "memory": "1Gi"
+    }
+  },
+  "files": [],
+  "identifier": "dm-tests",
+  "packages": [
+    "which",
+    "python3-pip"
+  ],
+  "python_packages": [
+    "micropipenv[toml]"
+  ],
+  "package_manager": "micropipenv",
+  "run": {
+    "requests": {
+      "cpu": "1",
+      "memory": "4Gi"
+    }
+  },
+  "script": "https://raw.githubusercontent.com/thoth-station/performance/master/tensorflow/matmul.py"
+}
