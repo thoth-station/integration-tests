@@ -75,3 +75,11 @@
 * :arrow_up: Automatic update of dependencies by Kebechet
 * Reintroduce README file in the repo
 * :arrow_up: Automatic update of dependencies by Kebechet
+
+## Release 0.8.0 (2021-03-03T16:09:03)
+### Features
+* Add fridex to OWNERS file
+### Improvements
+* Print response text from requests to make debugging easier
+### Non-functional
+* Implement testing Dependency Monkey (#159)
