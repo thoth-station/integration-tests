@@ -49,7 +49,7 @@ def step_impl(context):
     """Wait for submitted container image analysis to finish successfully."""
     retries = 0
     while True:
-        if retries > timedelta(minutes=45).total_seconds():
+        if retries > timedelta(minutes=15).total_seconds():
             assert False, "Container image analysis took too much time to finish"
 
         url = f"{context.scheme}://{context.user_api_host}/api/v1/analyze/{context.analysis_id}"
