@@ -69,7 +69,7 @@ def step_impl(context):
         url = f"{context.scheme}://{context.management_api_host}/api/v1/solver/python/" + a_i + "/status"
         retries = 0
         while True:
-            if retries > timedelta(minutes=45).total_seconds():
+            if retries > timedelta(minutes=5).total_seconds():
                 raise RuntimeError("Solver job took too much time to finish")
 
             response = requests.get(url)

@@ -98,7 +98,7 @@ def wait_for_inspection_to_finish(context):
     """Wait for scheduled inspection to finish."""
     retries = 0
     while True:
-        if retries > timedelta(minutes=45).total_seconds():
+        if retries > timedelta(minutes=15).total_seconds():
             raise RuntimeError("Inspection job took too much time to finish")
 
         response = get_inspection_status(context.amun_api_host, context.inspection_id)

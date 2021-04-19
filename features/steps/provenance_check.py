@@ -53,7 +53,7 @@ def step_impl(context):
     """Wait for submitted provenance-checker to finish."""
     retries = 0
     while True:
-        if retries > timedelta(minutes=45).total_seconds():
+        if retries > timedelta(minutes=15).total_seconds():
             raise RuntimeError("provenance-checker took too much time to finish")
 
         url = f"{context.scheme}://{context.user_api_host}/api/v1/provenance/python/{context.analysis_id}"

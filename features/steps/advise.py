@@ -99,7 +99,7 @@ def wait_for_adviser_to_finish(context):
     """Wait for submitted analysis to finish."""
     retries = 0
     while True:
-        if retries > timedelta(minutes=45).total_seconds():
+        if retries > timedelta(minutes=15).total_seconds():
             raise RuntimeError("Adviser analysis took too much time to finish")
 
         url = f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}"
@@ -251,3 +251,9 @@ def step_impl(context, runtime_environment: str, user_stack: str, static_analysi
             assert False, f"An error was encountered during the advise:\n{get_log(analysis_id)}"
 
         context.adviser_result = {"result": results[0]}
+
+
+@then("I should be able to see results of advise in the cloned application")
+def step_impl(context):
+    """Ask for results of advise."""
+    raise NotImplementedError("STEP: Then I should be able to see results of advise in the cloned application")
