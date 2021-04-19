@@ -57,7 +57,7 @@ def step_impl(context):
     """Check registered Python package indexes match the ones exposed on User API."""
     enabled = set(i["url"] for i in context.result["management_api_indexes"]["enabled"])
     diff = enabled.symmetric_difference([i["url"] for i in context.result["indexes"]])
-    assert not diff, f"Exposed Python Package indexes do not match the ones enabled on Management API"
+    assert not diff, "Exposed Python Package indexes do not match the ones enabled on Management API"
 
 
 @then('I should get "{index_url}" Python package index available in User API response')
@@ -87,7 +87,7 @@ def step_impl(context):
             assert entry["verify_ssl"] is True, f"Index {entry['url']!r} is registered with verify_ssl==False"
             break
     else:
-        assert False, f"PyPI.org package index is not registered"
+        assert False, "PyPI.org package index is not registered"
 
 
 @then("only PyPI has registered correct Warehouse API URL")
