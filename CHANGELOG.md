@@ -83,3 +83,17 @@
 * Print response text from requests to make debugging easier
 ### Non-functional
 * Implement testing Dependency Monkey (#159)
+
+## Release 0.8.1 (2021-04-21T15:09:55)
+### Features
+* :arrow_up: update ci config
+* :sparkles: add some more info based on https://github.com/thoth-station/core/blob/master/docs/TermsAndConditionsForTheScrum.md
+* :arrow_up: Automatic update of dependencies by Kebechet (#172)
+* Call config.reset_config() once advise is done (#154)
+* :arrow_up: Automatic update of dependencies by Kebechet (#170)
+* :arrow_up: Automatic update of dependencies by Kebechet (#169)
+* :arrow_up: Automatic update of dependencies by Kebechet (#166)
+* :arrow_up: Automatic update of dependencies by Kebechet (#164)
+* Discard any previous config loaded to the current process (#162)
+### Improvements
+* reduce timout of some tests (#174)
