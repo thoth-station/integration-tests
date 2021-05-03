@@ -94,7 +94,10 @@ def main() -> None:
     _print_info()
     print("Tests are executed using", args, file=sys.stderr)
 
-    exit_code = behave_main(args)
+    try:
+        exit_code = behave_main(args)
+    except OSError:
+        pass
 
     if _GENERATE_REPORT and _MAIL_REPORT:
         send_email()
