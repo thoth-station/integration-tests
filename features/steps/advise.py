@@ -230,27 +230,29 @@ def step_impl(context, runtime_environment: str, user_stack: str, static_analysi
     no_static_analysis = static_analysis == "without"
 
     config._configuration = None  # TODO: substitute with config.reset_config() once new thamos is released
+    config.load_config_from_file(os.path.join(context.repo.working_tree_dir, ".thoth.yaml"))
     config.explicit_host = context.user_api_host
     with cwd(context.repo.working_tree_dir):
-        try:
-            results = advise_here(
-                runtime_environment_name=runtime_environment,
-                no_static_analysis=no_static_analysis,
-                no_user_stack=no_user_stack,
-                force=False,
-            )
-        finally:
-            config.reset_config()
+        with cwd(config.get_overlays_directory(runtime_environment)):
+            try:
+                results = advise_here(
+                    runtime_environment_name=runtime_environment,
+                    no_static_analysis=no_static_analysis,
+                    no_user_stack=no_user_stack,
+                    force=False,
+                )
+            finally:
+                config.reset_config()
 
-        assert isinstance(results, tuple)
+            assert isinstance(results, tuple)
 
-        if results[1] is True:
-            with open(".thoth_last_analysis_id", "r") as f:
-                analysis_id = f.readline().strip()
+            if results[1] is True:
+                with open(".thoth_last_analysis_id", "r") as f:
+                    analysis_id = f.readline().strip()
 
-            assert False, f"An error was encountered during the advise:\n{get_log(analysis_id)}"
+                assert False, f"An error was encountered during the advise:\n{get_log(analysis_id)}"
 
-        context.adviser_result = {"result": results[0]}
+            context.adviser_result = {"result": results[0]}
 
 
 @then("I should be able to see results of advise in the cloned application")
