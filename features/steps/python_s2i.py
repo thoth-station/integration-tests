@@ -44,7 +44,7 @@ def step_impl(context, s2i: str):
         if s2i == entry["thoth_s2i_image_name"]:
             assert entry.get("thoth_s2i_image_version"), f"No version identifier found for {s2i!r} Thoth s2i"
             assert entry.get("analysis_id"), f"No container image analysis found for {s2i!r} Thoth s2i"
-            thoth_s2i = f"{s2i}:{entry['thoth_s2i_image_version']}"
+            thoth_s2i = f"{s2i}:v{entry['thoth_s2i_image_version']}"
             assert (
                 entry["thoth_s2i"] == thoth_s2i
             ), f"Wrong full qualifier for {s2i!r}, expected {thoth_s2i} but got {entry['thoth_s2i']} instead"
@@ -56,6 +56,6 @@ def step_impl(context, s2i: str):
 @then("I should see {count} Python Thoth s2i container images available")
 def step_impl(context, count: str):
     """Verify number of Thoth s2i registered."""
-    assert len(context.result["s2i"]) == int(
+    assert len(context.result["s2i"]) >= int(
         count
     ), f"Expected {count} Python Thoth s2i registered, got {len(context.result['s2i'])} instead"
