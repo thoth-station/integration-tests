@@ -97,3 +97,16 @@
 * Discard any previous config loaded to the current process (#162)
 ### Improvements
 * reduce timout of some tests (#174)
+
+## Release 0.8.2 (2021-05-07T18:53:23)
+### Features
+* Add Harshad to the maintainers listing (#191)
+* :arrow_up: Automatic update of dependencies by Kebechet (#188)
+* change the dir to runtime environment
+* :arrow_up: Automatic update of dependencies by Kebechet (#183)
+* :arrow_up: Automatic update of dependencies by Kebechet (#180)
+* :arrow_up: Automatic update of dependencies by Kebechet (#177)
+### Bug Fixes
+* Return error message if the package resolution is not avaialable (#190)
+* updated anaylsis response check scenario and fix platform scenario name (#189)
+* fix s2i image availabilty check
