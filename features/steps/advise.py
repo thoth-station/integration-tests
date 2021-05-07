@@ -157,9 +157,11 @@ def adviser_result_has_pinned_down_software_stack(context):
     ], f"Report field holding justification is empty for analysis {context.analysis_id}"
 
     assert (
+        "products" in context.adviser_result["result"]["report"]
+    ), f"Software stack not available, {context.adviser_result['result']['report']['ERROR']}"
+    assert (
         len(context.adviser_result["result"]["report"]["products"]) == 1
     ), f"Report should contain one software stack recommended for analysis {context.analysis_id}"
-
     assert (
         "stack_info" in context.adviser_result["result"]["report"]
     ), f"Report should container stack information for {context.analysis_id}"
