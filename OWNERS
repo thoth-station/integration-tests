@@ -1,6 +1,7 @@
 # See the OWNERS docs at https://go.k8s.io/owners
 
 approvers:
+  - harshad16
   - goern
   - pacospace
   - sesheta
@@ -8,5 +9,4 @@ approvers:
   - sefkhet-abwy[bot]
 reviewers:
   - kpostoffice
-  - harshad16
   - saisankargochhayat
