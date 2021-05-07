@@ -253,9 +253,18 @@ def step_impl(context, runtime_environment: str, user_stack: str, static_analysi
                 assert False, f"An error was encountered during the advise:\n{get_log(analysis_id)}"
 
             context.adviser_result = {"result": results[0]}
+            if ".thoth_last_analysis_id" in os.listdir():
+                with open(".thoth_last_analysis_id") as analysis_id:
+                    context.analysis_id = analysis_id.readline()
 
 
 @then("I should be able to see results of advise in the cloned application")
 def step_impl(context):
     """Ask for results of advise."""
-    raise NotImplementedError("STEP: Then I should be able to see results of advise in the cloned application")
+    assert hasattr(context, "analysis_id"), "analysis_id is not provided, which is required."
+    response = requests.get(f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}")
+    assert response.status_code == 200, (
+        f"Bad status code ({response.status_code}) when obtaining adviser result from "
+        f"{context.user_api_host}: {response.text}"
+    )
+    context.adviser_result = response.json()
