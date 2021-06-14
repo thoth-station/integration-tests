@@ -12,6 +12,8 @@ Feature: Running thamos advise against deployment
           Examples: Advise
               | case                      |  recommendation_type    |  python_version |
               | flask_py36                |  LATEST                 |  3.6            |
+              | flask_py38                |  LATEST                 |  3.8            |
+              | flask_py39                |  LATEST                 |  3.9            |
               | rhods                     |  STABLE                 |  3.8            |
 
      @seizes_backend_namespace
