@@ -8,9 +8,6 @@ Feature: Python package index
             | index_url                                                                   |
             | https://pypi.org/simple                                                     |
             | https://tensorflow.pypi.thoth-station.ninja/index/manylinux2010/AVX2/simple |
-            | https://tensorflow.pypi.thoth-station.ninja/index/rhel7.5/AVX2/simple       |
-            | https://tensorflow.pypi.thoth-station.ninja/index/rhel7.6/AVX2/simple       |
-            | https://tensorflow.pypi.thoth-station.ninja/index/rhel7.7/AVX2/simple       |
 
     Scenario: Querying for number of Python package indexes registered
         Given deployment is accessible using HTTPS
