@@ -110,3 +110,17 @@
 * Return error message if the package resolution is not avaialable (#190)
 * updated anaylsis response check scenario and fix platform scenario name (#189)
 * fix s2i image availabilty check
+
+## Release 0.8.3 (2021-06-28T10:34:03)
+### Features
+* :arrow_up: Automatic update of dependencies by Kebechet
+* Expect at least 2 Python package indexes registered
+* :arrow_up: Automatic update of dependencies by Kebechet
+* :arrow_up: Automatic update of dependencies by Kebechet (#196)
+* :hatched_chick: update the prow resource limits
+* always verify TLS
+### Improvements
+* added some test cases
+* :arrow_up: standard updates
+### Other
+* Remove indexes removed from deployments
