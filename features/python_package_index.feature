@@ -12,7 +12,7 @@ Feature: Python package index
     Scenario: Querying for number of Python package indexes registered
         Given deployment is accessible using HTTPS
         When I query for the list of known Python Package indexes on User API
-        Then I should see 5 Python package indexes registered
+        Then I should see at least 2 Python package indexes registered
 
     Scenario: Querying for PyPI index on User API
         Given deployment is accessible using HTTPS

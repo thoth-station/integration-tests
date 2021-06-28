@@ -71,12 +71,12 @@ def step_impl(context, index_url: str):
         assert False, f"Python package index {index_url!r} is not available on User API"
 
 
-@then("I should see {count} Python package indexes registered")
+@then("I should see at least {count} Python package indexes registered")
 def step_impl(context, count: int):
     """Verify PyPI has correct Warehouse API URL registered."""
-    assert len(context.result["indexes"]) == int(
+    assert len(context.result["indexes"]) >= int(
         count
-    ), f"Expected {count} Python package indexes registered, got {len(context.result['indexes'])}"
+    ), f"Expected at least {count} Python package indexes registered, got {len(context.result['indexes'])}"
 
 
 @then("I should see PyPI.org in the listing")
