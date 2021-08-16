@@ -32,3 +32,10 @@ Feature: Running thamos advise against deployment
             | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | training                | without     | without         |
             | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | inference               | without     | without         |
             | https://github.com/aicoe-aiops/ocp-ci-analysis                       | rhel:8                  | without     | without         |
+            | https://github.com/thoth-station/ps-cv                               | ps-cv-ocr               | without     | without         |
+            | https://github.com/thoth-station/ps-cv                               | ps-cv-pytorch           | without     | without         |
+            | https://github.com/thoth-station/ps-cv                               | ps-cv-tensorflow        | without     | without         |
+            | https://github.com/thoth-station/ps-nlp                              | ps-nlp                  | without     | without         |
+            | https://github.com/thoth-station/ps-nlp                              | ps-nlp-tensorflow       | without     | without         |
+            | https://github.com/thoth-station/ps-nlp                              | ps-nlp-pytorch          | without     | without         |
+            | https://github.com/thoth-station/ps-nlp                              | ps-nlp-tensorflow-gpu   | without     | without         |
