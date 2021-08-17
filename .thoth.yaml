@@ -19,9 +19,10 @@ managers:
   - name: version
     configuration:
       maintainers:
-        - harshad16
-        - fridex
         - goern
+        - harshad16
+        - pacospace
+        - fridex
       assignees:
         - sesheta
       labels: [bot]
