@@ -1,4 +1,10 @@
 
+## Release 0.8.4 (2021-08-17T08:57:30)
+### Features
+* :arrow_up: Automatic update of dependencies by Kebechet
+### Improvements
+* Add integrations tests for predictive stacks
+
 ## Release 0.2.0 (2021-02-08T19:56:03)
 ### Features
 * Add version file (#75)
