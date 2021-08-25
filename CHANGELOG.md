@@ -1,4 +1,10 @@
 
+## Release 0.8.5 (2021-08-25T11:31:06)
+### Features
+* Fix assignment of the host
+### Bug Fixes
+* Fix wrong config in thamos advise integration test
+
 ## Release 0.8.4 (2021-08-17T08:57:30)
 ### Features
 * :arrow_up: Automatic update of dependencies by Kebechet
