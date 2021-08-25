@@ -17,6 +17,7 @@
 
 """Integration tests related to Thamos advise - using thamos library."""
 
+import json
 from datetime import timedelta
 import contextlib
 import os
@@ -26,8 +27,9 @@ import time
 
 from thamos.config import config
 from thamos.lib import advise
-from thamos.lib import advise_here
+from thamos.lib import advise_using_config
 from thamos.lib import get_log
+from thoth.python import Project
 import git
 
 from behave import then
@@ -233,14 +235,26 @@ def step_impl(context, runtime_environment: str, user_stack: str, static_analysi
 
     config._configuration = None  # TODO: substitute with config.reset_config() once new thamos is released
     config.load_config_from_file(os.path.join(context.repo.working_tree_dir, ".thoth.yaml"))
-    config.explicit_host = context.user_api_host
+    config.content["host"] = context.user_api_host
+
     with cwd(context.repo.working_tree_dir):
+
         with cwd(config.get_overlays_directory(runtime_environment)):
+
+            project = Project.from_files(
+                pipfile_path="Pipfile",
+                without_pipfile_lock=not os.path.exists("Pipfile.lock"),
+            )
+
+            print(config.content)
             try:
-                results = advise_here(
+                results = advise_using_config(
+                    pipfile=project.pipfile.to_string(),
+                    pipfile_lock=project.pipfile_lock.to_string() if project.pipfile_lock else None,
                     runtime_environment_name=runtime_environment,
                     no_static_analysis=no_static_analysis,
                     no_user_stack=no_user_stack,
+                    config=json.dumps(config.content),
                     force=False,
                 )
             finally:
