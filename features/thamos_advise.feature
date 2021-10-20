@@ -35,7 +35,7 @@ Feature: Running thamos advise against deployment
             | https://github.com/thoth-station/ps-cv                               | ps-cv-ocr               | without     | without         |
             | https://github.com/thoth-station/ps-cv                               | ps-cv-pytorch           | without     | without         |
             | https://github.com/thoth-station/ps-cv                               | ps-cv-tensorflow        | without     | without         |
-            | https://github.com/thoth-station/ps-ip                               | ps-ip-ifd	             | without     | without         |
+            | https://github.com/thoth-station/ps-ip                               | ps-ip-ifd               | without     | without         |
             | https://github.com/thoth-station/ps-nlp                              | ps-nlp                  | without     | without         |
             | https://github.com/thoth-station/ps-nlp                              | ps-nlp-tensorflow       | without     | without         |
             | https://github.com/thoth-station/ps-nlp                              | ps-nlp-pytorch          | without     | without         |
