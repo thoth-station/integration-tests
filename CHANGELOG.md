@@ -1,4 +1,10 @@
 
+## Release 0.8.5+build.1 (2021-11-24T12:50:50)
+* :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* Swapped tab for space
+* Added ps-ip-ifd
+* :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+
 ## Release 0.8.5 (2021-08-25T11:31:06)
 ### Features
 * Fix assignment of the host
