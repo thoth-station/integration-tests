@@ -25,11 +25,21 @@ from hamcrest import assert_that
 from hamcrest import equal_to
 
 
-@when('I query Thoth User API for metadata about "{index}" "{package}" "{version}"')
-def step_impl(context, index: str, package: str, version: str):
+@when(
+    'I query Thoth User API for metadata about "{index}" "{package}" "{version}" for'
+    ' "{os_name}" "{os_version}" "{python_version}"'
+)
+def step_impl(context, index: str, package: str, version: str, os_name: str, os_version: str, python_version: str):
     """Retrieve metadata about Python Package."""
-    params = {"index": index, "name": package, "version": version}
-    url = f"{context.scheme}://{context.user_api_host}/api/v1/python/package/metadata"
+    params = {
+        "index": index,
+        "name": package,
+        "version": version,
+        "os_name": os_name,
+        "os_version": os_version,
+        "python_version": python_version,
+    }
+    url = f"{context.scheme}://{context.user_api_host}/api/v1/python/package/version/metadata"
     response = requests.get(url, params=params)
 
     assert (
@@ -42,8 +52,9 @@ def step_impl(context, index: str, package: str, version: str):
 @then('I should get "{author}" and "{maintainer}"')
 def step_impl(context, author: str, maintainer: str):
     """Verify conditions for author and maintainer."""
-    assert_that(context.result["author"], equal_to(author))
-    assert_that(str(context.result["maintainer"]), equal_to(maintainer))
+    metadata = (context.result.get("importlib_metadata") or {}).get("metadata") or {}
+    assert_that(metadata.get("Author"), equal_to(author))
+    assert_that(metadata.get("Maintainer"), equal_to(maintainer))
 
 
 @when('I query Thoth User API for dependencies of "{package_name}" in version "{version}" from "{index}"')
