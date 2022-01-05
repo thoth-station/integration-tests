@@ -49,7 +49,7 @@ def step_impl(context, container_image: str):
             thoth_s2i = f"{container_image}:v{entry['thoth_s2i_image_version']}"
             assert entry["thoth_s2i"] == thoth_s2i, (
                 f"Wrong full qualifier for {container_image!r}, expected {thoth_s2i} "
-                "but got {entry['thoth_s2i']} instead"
+                f"but got {entry['thoth_s2i']} instead"
             )
             break
     else:
