@@ -1,13 +1,12 @@
 Feature: Querying Thoth for Python package metadata
     Scenario Outline: Query for metadata for different indices for TensorFlow
         Given deployment is accessible using HTTPS
-        When I query Thoth User API for metadata about "<index>" "<package>" "<version>"
+        When I query Thoth User API for metadata about "<index>" "<package>" "<version>" for "<os_name>" "<os_version>" "<python_version>"
         Then I should get "<author>" and "<maintainer>"
 
         Examples: Packages
-            | index                                                                       | package    | version | author       | maintainer |
-            | https://pypi.org/simple                                                     | tensorflow | 2.0.0   | Google Inc.  | None       |
-            | https://tensorflow.pypi.thoth-station.ninja/index/manylinux2010/AVX2/simple | tensorflow | 2.0.0   | Red Hat Inc. | None       |
+            | index                                                                       | package    | version | author       | maintainer | os_name  | os_version  | python_version |
+            | https://pypi.org/simple                                                     | tensorflow | 2.7.0   | Google Inc.  | None       | rhel     |   8         |  3.8           |
 
     Scenario Outline: Query for package dependencies
         Given deployment is accessible using HTTPS
@@ -16,8 +15,7 @@ Feature: Querying Thoth for Python package metadata
 
         Examples: Packages
             | index                                                                       | package_name    | version | dependencies   |
-            | https://pypi.org/simple                                                     | tensorflow      | 2.0.0   | numpy,absl-py  |
-            | https://tensorflow.pypi.thoth-station.ninja/index/manylinux2010/AVX2/simple | tensorflow      | 2.0.0   | numpy,absl-py  |
+            | https://pypi.org/simple                                                     | tensorflow      | 2.6.2   | numpy,absl-py  |
 
     Scenario Outline: Query for package versions
         Given deployment is accessible using HTTPS
@@ -26,5 +24,5 @@ Feature: Querying Thoth for Python package metadata
 
         Examples: Packages
             | package_name    | versions                    |
-            | tensorflow      | 2.2.0,2.3.0                 |
-            | requests        | 2.12.5,0.8.4                |
+            | tensorflow      | 2.2.0,2.1.4                 |
+            | requests        | 2.16.3,2.16.0               |
