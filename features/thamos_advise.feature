@@ -25,6 +25,7 @@ Feature: Running thamos advise against deployment
 
         Examples: Advise
             | git_repo                                                             | runtime_environment     | user_stack  | static_analysis |
+            | https://github.com/thoth-station/cli-examples                        | ubi8                    | with        | with            |
             | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | download-dataset        | with        | without         |
             | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | training                | without     | with            |
             | https://github.com/thoth-station/elyra-aidevsecops-tutorial          | download-dataset        | without     | without         |
