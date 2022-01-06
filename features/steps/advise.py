@@ -58,10 +58,10 @@ def cwd(path):
 
 
 @when(
-    "thamos advise is run for {case} for recommendation type {recommendation_type} for "
-    "Python {python_version} asynchronously"
+    "thamos advise is run for {case} for recommendation type {recommendation_type} "
+    "for {os_name}:{os_version} Python {python_version} asynchronously"
 )
-def thamos_advise(context, case: str, recommendation_type: str, python_version: str):
+def thamos_advise(context, case: str, recommendation_type: str, os_name: str, os_version: str, python_version: str):
     """Call library function from Thamos to submit analysis to Thoth."""
     if recommendation_type not in _RECOMMENDATION_TYPES:
         assert False, f"Invalid recommendation type {recommendation_type!r}, accepted: {list(_RECOMMENDATION_TYPES)}"
@@ -85,14 +85,14 @@ def thamos_advise(context, case: str, recommendation_type: str, python_version: 
         no_static_analysis=True,
         runtime_environment={
             "name": "rhel",
-            "operating_system": {"name": "rhel", "version": "8.0"},
+            "operating_system": {"name": os_name, "version": os_version},
             "python_version": python_version,
         },
         nowait=True,
         force=True,
         limit=None,
         count=1,
-        debug=True,
+        debug=False,
     )
 
 
