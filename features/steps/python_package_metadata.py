@@ -57,11 +57,24 @@ def step_impl(context, author: str, maintainer: str):
     assert_that(metadata.get("Maintainer"), equal_to(maintainer))
 
 
-@when('I query Thoth User API for dependencies of "{package_name}" in version "{version}" from "{index}"')
-def step_impl(context, package_name: str, version: str, index: str):
+@when(
+    'I query Thoth User API for dependencies of "{package_name}"'
+    'in version "{version}" from "{index}" for "{os_name}" "{os_version}" "{python_version}"'
+)
+def step_impl(context, package_name: str, version: str, index: str, os_name: str, os_version: str, python_version: str):
     """Query Thoth for Python package dependencies."""
     url = f"{context.scheme}://{context.user_api_host}/api/v1/python/package/dependencies"
-    response = requests.get(url, params={"name": package_name, "version": version, "index": index})
+    response = requests.get(
+        url,
+        params={
+            "name": package_name,
+            "version": version,
+            "index": index,
+            "os_name": os_name,
+            "os_version": os_version,
+            "python_version": python_version,
+        },
+    )
 
     assert (
         response.status_code == 200
@@ -70,7 +83,7 @@ def step_impl(context, package_name: str, version: str, index: str):
     context.dependencies = response.json()["dependencies"]
 
 
-@then("I should see {dependencies} in the dependency listing")
+@then('I should see "{dependencies}" in the dependency listing')
 def step_impl(context, dependencies: str):
     """Check Python package dependencies."""
     package_dependencies = list(map(str.strip, dependencies.split(",")))
@@ -89,15 +102,13 @@ def step_impl(context, dependencies: str):
             assert False, f"Dependency {dependency!r} not stated in the dependency listing"
 
 
-@when('I query Thoth User API for versions of "{package_name}"')
-def step_impl(context, package_name: str):
+@when('I query Thoth User API for versions of "{package_name}" for "{os_name}" "{os_version}" "{python_version}"')
+def step_impl(context, package_name: str, os_name: str, os_version: str, python_version: str):
     """Query User API for versions of a package."""
     url = f"{context.scheme}://{context.user_api_host}/api/v1/python/package/versions"
     response = requests.get(
         url,
-        params={
-            "name": package_name,
-        },
+        params={"name": package_name, "os_name": os_name, "os_version": os_version, "python_version": python_version},
     )
 
     assert (
@@ -108,7 +119,7 @@ def step_impl(context, package_name: str):
     context.package_versions = response.json()["versions"]
 
 
-@then("I should see {versions} in the version listing")
+@then('I should see "{versions}" in the version listing')
 def step_impl(context, versions: str):
     """Check versions available for the given package."""
     versions = list(map(str.strip, versions.split(",")))
