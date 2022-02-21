@@ -1,4 +1,17 @@
 
+## Release 0.9.1 (2022-02-21T09:45:16)
+* Remove thoth_s2i variable
+* Update container_images feature tests according to new content format
+* :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* Fix type of assert_that argument
+* :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* Fix tensorflow versions and scenario parameters
+* Fix package_metadata feature
+* :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* :pill: fix the container image testing
+* Add thoth-station/cli-examples to integration-tests
+
 ## Release 0.9.0 (2022-01-06T08:48:49)
 * :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
 * Update features/steps/container_images.py
