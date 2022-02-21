@@ -54,12 +54,12 @@ def step_impl(context, author: str, maintainer: str):
     """Verify conditions for author and maintainer."""
     metadata = (context.result.get("importlib_metadata") or {}).get("metadata") or {}
     assert_that(metadata.get("Author"), equal_to(author))
-    assert_that(metadata.get("Maintainer"), equal_to(maintainer))
+    assert_that(str(metadata.get("Maintainer")), equal_to(maintainer))
 
 
 @when(
     'I query Thoth User API for dependencies of "{package_name}"'
-    'in version "{version}" from "{index}" for "{os_name}" "{os_version}" "{python_version}"'
+    ' in version "{version}" from "{index}" for "{os_name}" "{os_version}" "{python_version}"'
 )
 def step_impl(context, package_name: str, version: str, index: str, os_name: str, os_version: str, python_version: str):
     """Query Thoth for Python package dependencies."""
