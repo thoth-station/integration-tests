@@ -41,17 +41,13 @@ def step_impl(context):
 def step_impl(context, container_image: str):
     """Verify the given container image is available on User API."""
     for entry in context.result["container_images"]:
-        if container_image == entry["thoth_image_name"]:
-            assert entry.get("thoth_image_version"), f"No version identifier found for {container_image!r}"
-            assert entry.get(
-                "package_extract_document_id"
-            ), f"No container image analysis found for {container_image!r} Thoth container images"
-            thoth_s2i = f"{container_image}:v{entry['thoth_image_version']}"
-            assert entry["thoth_s2i"] == thoth_s2i, (
-                f"Wrong full qualifier for {container_image!r}, expected {thoth_s2i} "
-                f"but got {entry['thoth_s2i']} instead"
-            )
-            break
+        assert len(entry["environment_name"].split(":")) == 2 and entry["environment_name"].split(":")[1].startswith(
+            "v"
+        ), f"No version identifier found for {container_image!r}"
+        assert entry.get(
+            "package_extract_document_id"
+        ), f"No container image analysis found for {container_image!r} Thoth container images"
+        break
     else:
         assert (
             False
