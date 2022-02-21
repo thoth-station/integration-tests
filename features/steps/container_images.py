@@ -47,7 +47,6 @@ def step_impl(context, container_image: str):
         assert entry.get(
             "package_extract_document_id"
         ), f"No container image analysis found for {container_image!r} Thoth container images"
-        thoth_s2i = f"{container_image}:v{entry['thoth_image_version']}"
         break
     else:
         assert (
