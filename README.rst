@@ -47,3 +47,9 @@ If you want to run a single feature test:
 .. code-block:: console
 
   app.py -i <feature name>.feature
+
+If you want to run a single scenario test:
+
+.. code-block:: console
+
+  app.py -i <feature name> -n '<scenario name>'
