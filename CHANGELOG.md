@@ -1,4 +1,12 @@
 
+## Release 0.9.2 (2022-02-24T17:08:28)
+* Add running a single test scenario to docs
+* Increase dependency monkey timeout
+* Use dash instead of colon in the runtime environment entry
+* Add username to approvers and reviewers
+* Advise can take up to 20 minutes, add some time
+* :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+
 ## Release 0.9.1 (2022-02-21T09:45:16)
 * Remove thoth_s2i variable
 * Update container_images feature tests according to new content format
