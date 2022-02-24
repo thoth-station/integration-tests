@@ -101,7 +101,7 @@ def wait_for_adviser_to_finish(context):
     """Wait for submitted analysis to finish."""
     retries = 0
     while True:
-        if retries > timedelta(minutes=15).total_seconds():
+        if retries > timedelta(minutes=45).total_seconds():
             raise RuntimeError("Adviser analysis took too much time to finish")
 
         url = f"{context.scheme}://{context.user_api_host}/api/v1/advise/python/{context.analysis_id}"
