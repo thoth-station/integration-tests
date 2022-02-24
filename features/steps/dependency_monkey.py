@@ -89,7 +89,7 @@ def wait_for_dependency_monkey_to_finish(context):
         f"python/{context.analysis_id}/status"
     )
     while True:
-        if retries > timedelta(minutes=15).total_seconds():
+        if retries > timedelta(minutes=45).total_seconds():
             raise RuntimeError("Adviser analysis took too much time to finish")
 
         response = requests.get(url)
