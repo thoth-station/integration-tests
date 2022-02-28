@@ -94,9 +94,17 @@ def step_impl(context):
     context.provenance_result = response.json()
 
 
-@then("I should be able to see successful results of provenance check")
-def step_impl(context):
+@then("I should be able to see {result} provenance check results")
+def step_impl(context, result: str):
     """Check provenance-checker result."""
+    assert result in ("successful", "failed"), "Unknown result expectation"
+    any_error = result != "successful"
+
     assert (
         context.provenance_result["result"]["error"] is False
     ), f"Provenance check {context.analysis_id!r} was not successful"
+
+    if any_error:
+        assert any(i["type"] == "ERROR" for i in context.provenance_result["result"]["report"])
+    else:
+        assert all(i["type"] != "ERROR" for i in context.provenance_result["result"]["report"])
