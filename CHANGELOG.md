@@ -1,4 +1,9 @@
 
+## Release 0.9.3 (2022-03-01T17:08:53)
+* :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* Remove ocp-ci-analysis repo
+* Provide provenance-check that results in errors
+
 ## Release 0.9.2 (2022-02-24T17:08:28)
 * Add running a single test scenario to docs
 * Increase dependency monkey timeout
