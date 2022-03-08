@@ -246,7 +246,6 @@ def step_impl(context, runtime_environment: str, user_stack: str, static_analysi
                 without_pipfile_lock=not os.path.exists("Pipfile.lock"),
             )
 
-            print(config.content)
             try:
                 results = advise_using_config(
                     pipfile=project.pipfile.to_string(),
