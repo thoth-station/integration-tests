@@ -5,24 +5,13 @@ boots:
   name: PythonVersionBoot
 - configuration: {}
   name: RHELVersionBoot
-- configuration:
-    default_platform: linux-x86_64
-  name: PlatformBoot
 - configuration: {}
   name: FullySpecifiedEnvironment
 sieves:
 - configuration: {}
   name: CutPreReleasesSieve
 - configuration: {}
-  name: Functools32BackportSieve
-- configuration: {}
-  name: Enum34BackportSieve
-- configuration: {}
-  name: MockBackportSieve
-- configuration: {}
   name: CutLockedSieve
-- configuration: {}
-  name: Py36SetuptoolsSieve
 - configuration: {}
   name: PackageIndexSieve
 - configuration:
@@ -31,8 +20,4 @@ sieves:
 steps: []
 strides:
 - name: UniqueStackStride
-wraps:
-- configuration: {}
-  name: MKLThreadsWrap
-- configuration: {}
-  name: NoObservationWrap
+wraps: []

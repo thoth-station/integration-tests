@@ -78,6 +78,8 @@ def step_impl(context, case: str, count: str, dry_run: str, predictor: str, pred
     context.amun_context = amun_context
     context.pipfile = pipfile
     context.count = int(count)
+    context.predictor = predictor
+    context.predictor_config = predictor_config
 
 
 @then("wait for Dependency Monkey to finish successfully")
@@ -145,7 +147,6 @@ def step_impl(context) -> None:
     assert "report" in response_body, f"No report available in the response: {response_body}"
     assert "result" in response_body["report"], f"No result available in the response: {response_body}"
     assert response_body["report"]["result"]["error"] is False
-    assert response_body["report"]["result"]["parameters"]["pipeline"] == context.pipeline
     assert response_body["report"]["result"]["parameters"]["requirements"] == context.pipfile
     assert (
         response_body["report"]["result"]["parameters"]["runtime_environment"]
