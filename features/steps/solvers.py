@@ -27,6 +27,22 @@ from datetime import timedelta
 from behave import when, then
 
 
+@when("we ask for the available runtime environments")
+def step_impl(context):
+    """Retrieve available runtime environments."""
+    url = f"{context.scheme}://{context.user_api_host}/api/v1/python/environment"
+    data = requests.get(url).json()
+    context.result = data
+
+
+@then("I should see {os_name} in version {os_version} running {python_version}")
+def step_impl(context, os_name: str, os_version: str, python_version: str):
+    """Check available environments."""
+    entry = {"os_name": os_name, "os_version": os_version, "python_version": python_version}
+
+    assert entry in context.result["environment"], context.result
+
+
 @when("we ask for the available solvers")
 def step_impl(context):
     """Retrieve available solvers."""
