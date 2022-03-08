@@ -8,6 +8,11 @@ Feature: Python package index
             | index_url                                                                   |
             | https://pypi.org/simple                                                     |
             | https://tensorflow.pypi.thoth-station.ninja/index/manylinux2010/AVX2/simple |
+            | https://download.pytorch.org/whl/cpu                                        |
+            | https://download.pytorch.org/whl/cu111                                      |
+            | https://pulp.operate-first.cloud/pypi/gym-donkeycar/simple                  |
+            | https://pulp.operate-first.cloud/pypi/hello-world/simple                    |
+            | https://pulp.operate-first.cloud/pypi/test/simple                           |
 
     Scenario: Querying for number of Python package indexes registered
         Given deployment is accessible using HTTPS
