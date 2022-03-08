@@ -118,4 +118,4 @@ def wait_for_inspection_to_finish(context):
 def retrieve_inspection_result(context):
     """Retrieve inspection from Thoth using Amun API."""
     response = get_inspection_build_log(context.amun_api_host, context.inspection_id)
-    assert response
+    assert response, f"No response retrieved for {context.inspection_id}"
