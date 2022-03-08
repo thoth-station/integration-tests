@@ -1,4 +1,11 @@
 
+## Release 0.10.0 (2022-03-08T18:14:55)
+* Fix scenarios related to dependency monkey
+* Check available runtime environments
+* Remove print statement
+* Extend registered indexes
+* Show inspection_id if the inspection retrieval fails
+
 ## Release 0.9.3 (2022-03-01T17:08:53)
 * :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
 * Remove ocp-ci-analysis repo
