@@ -5,8 +5,7 @@ boots:
   name: PythonVersionBoot
 - configuration: {}
   name: RHELVersionBoot
-- configuration:
-    default_platform: linux-x86_64
+- configuration: {}
   name: PlatformBoot
 - configuration: {}
   name: FullySpecifiedEnvironment
