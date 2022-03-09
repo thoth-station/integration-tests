@@ -1,4 +1,8 @@
 
+## Release 0.11.0 (2022-03-09T20:06:17)
+* Add my username to maintainers
+* Tag solver scenario to be omitted in stage
+
 ## Release 0.10.1 (2022-03-09T06:51:16)
 * Fix index used for solving a package
 
