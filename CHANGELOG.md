@@ -1,4 +1,7 @@
 
+## Release 0.10.1 (2022-03-09T06:51:16)
+* Fix index used for solving a package
+
 ## Release 0.10.0 (2022-03-08T18:14:55)
 * Fix scenarios related to dependency monkey
 * Check available runtime environments
