@@ -67,7 +67,7 @@ def step_impl(context, package_name, package_version):
     response = requests.post(
         url,
         json={"package_name": package_name, "version_specifier": "==" + package_version},
-        params={"secret": context.management_api_secret},
+        params={"secret": context.management_api_secret, "index_url": "https://pypi.org/simple"},
     )
 
     assert response.status_code == 202, (
@@ -85,7 +85,7 @@ def step_impl(context):
         url = f"{context.scheme}://{context.management_api_host}/api/v1/solver/python/" + a_i + "/status"
         retries = 0
         while True:
-            if retries > timedelta(minutes=5).total_seconds():
+            if retries > timedelta(minutes=30).total_seconds():
                 raise RuntimeError("Solver job took too much time to finish")
 
             response = requests.get(url)
