@@ -1,11 +1,11 @@
 ---
 repos:
-  - repo: git://github.com/Lucas-C/pre-commit-hooks
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
     rev: v1.1.13
     hooks:
       - id: remove-tabs
 
-  - repo: git://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.1.0
     hooks:
       - id: trailing-whitespace
@@ -22,7 +22,7 @@ repos:
       - id: check-ast
       - id: debug-statements
 
-  - repo: git://github.com/pycqa/pydocstyle.git
+  - repo: https://github.com/pycqa/pydocstyle.git
     rev: 6.1.1
     hooks:
       - id: pydocstyle
@@ -36,14 +36,21 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/psf/black
-    rev: 22.1.0
+    rev: 22.3.0
     hooks:
       - id: black
 
   - repo: https://gitlab.com/PyCQA/flake8
-    rev: '3.9.2'
+    rev: "3.9.2"
     hooks:
       - id: flake8
-        additional_dependencies: ['pep8-naming']
+        additional_dependencies: ["pep8-naming"]
         # Ignore all format-related checks as Black takes care of those.
-        args: ['--ignore', 'E2,W5,F811', '--select', 'E,W,F,N', '--max-line-length=120']
+        args:
+          [
+            "--ignore",
+            "E2,W5,F811",
+            "--select",
+            "E,W,F,N",
+            "--max-line-length=120",
+          ]
