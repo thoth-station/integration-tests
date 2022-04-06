@@ -1,4 +1,11 @@
 
+## Release 0.11.1 (2022-04-06T06:52:42)
+* 1dd3978 Remove count and limit parameters from advise query
+* 4fa4a2f Update pre-commit config and git protocol
+* 5466016 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* ed98046 :ship: Bump up base image initialized in CI.
+* de7924d :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+
 ## Release 0.11.0 (2022-03-09T20:06:17)
 * Add my username to maintainers
 * Tag solver scenario to be omitted in stage
