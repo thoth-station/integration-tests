@@ -90,8 +90,6 @@ def thamos_advise(context, case: str, recommendation_type: str, os_name: str, os
         },
         nowait=True,
         force=True,
-        limit=None,
-        count=1,
         debug=False,
     )
 
