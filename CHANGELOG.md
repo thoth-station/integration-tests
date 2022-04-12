@@ -1,4 +1,9 @@
 
+## Release 0.11.2 (2022-04-12T15:46:46)
+* 17d358f Attach thoth and thamos versions to tests report email
+* 201e059 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* 3a80956 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+
 ## Release 0.11.1 (2022-04-06T06:52:42)
 * 1dd3978 Remove count and limit parameters from advise query
 * 4fa4a2f Update pre-commit config and git protocol
