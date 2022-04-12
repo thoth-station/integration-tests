@@ -22,6 +22,8 @@ from datetime import date
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
+from thamos.config import config
+from thamos.lib import thamos_version
 import os
 import smtplib
 import sys
@@ -69,6 +71,8 @@ def send_email() -> None:
     msg["From"] = _EMAIL_FROM
     msg["To"] = _EMAIL_TO
     msg.attach(MIMEText(report, "html"))  # Message body.
+    msg.attach(MIMEText(f"Thoth version: {config.get_thoth_version()}\n"))
+    msg.attach(MIMEText(f"Thamos version: {thamos_version}"))
 
     attachment = MIMEApplication(report, _subtype="html")
     attachment.add_header("content-disposition", "attachment", filename=_BEHAVE_REPORT_FILE)
