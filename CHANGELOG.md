@@ -1,4 +1,15 @@
 
+## Release 0.11.3 (2022-08-09T07:00:19)
+* 5db65e4 :ship: Bump up base image initialized in CI. (#332)
+* e400b44 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* 753f0e4 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* 8239900 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* 6907862 :ship: Bump up base image initialized in CI. (#322)
+* 57cd3b9 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* 4485c79 :ship: Bump up base image initialized in CI.
+* 64bf2e0 Update OWNERS and refresh pre-commit
+* 7cc3225 Increase provenance-check test time limit
+
 ## Release 0.11.2 (2022-04-12T15:46:46)
 * 17d358f Attach thoth and thamos versions to tests report email
 * 201e059 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
