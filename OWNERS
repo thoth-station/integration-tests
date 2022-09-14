@@ -2,10 +2,13 @@
 
 approvers:
   - codificat
-  - fridex
   - goern
   - harshad16
   - mayacostantini
+
 reviewers:
   - kpostoffice
   - mayacostantini
+
+emeritus_approvers:
+  - fridex  # 2022 Jun
