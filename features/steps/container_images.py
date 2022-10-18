@@ -23,18 +23,29 @@ from behave import when
 from behave import then
 
 
-@when("I query for the list of available Thoth container images on User API")
-def step_impl(context):
+@when(
+    "I query for page {page} and want to get {per_page} results per page of available Thoth container images on User API"  # noqa: E501
+)
+def step_impl(context, page: int, per_page: int):
     """Retrieve list of container images known to Thoth."""
+    _page = int(page) - 1  # API uses natural numbers, humans use 1-based indexing
     context.result = {}
-    url = f"{context.scheme}://{context.user_api_host}/api/v1/container-images"
+    url = f"{context.scheme}://{context.user_api_host}/api/v1/container-images?per_page={per_page}&page={_page}"
 
     response = requests.get(url)
-    assert (
-        response.status_code == 200
-    ), f"Bad status code ({response.status_code}) when obtaining Thoth container images from {url}: {response.text}"
+    assert response.status_code in {
+        200,
+        404,
+    }, f"Bad status code ({response.status_code}) when obtaining Thoth container images from {url}: {response.text}"
 
     context.result = response.json()
+    context.response_status_code = response.status_code
+
+
+@then("I should get a 404 and be ok with that.")
+def step_impl(context):
+    """Check if we got a 404 response."""
+    assert context.response_status_code == 404
 
 
 @then('I should get "{container_image}" Thoth container image available in the User API response')
@@ -54,7 +65,7 @@ def step_impl(context, container_image: str):
         ), f"Thoth container image {container_image!r} not available in the Thoth container images listing on User API"
 
 
-@then("I should see {count} Thoth container images available")
+@then("I should see at least {count} Thoth container images available")
 def step_impl(context, count: str):
     """Verify number of Thoth container images registered."""
     assert len(context.result["container_images"]) >= int(
