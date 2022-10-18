@@ -1,7 +1,7 @@
 Feature: Thoth container images
     Scenario Outline: Querying for registered Thoth container images on User API
         Given deployment is accessible using HTTPS
-        When I query for the list of available Thoth container images on User API
+        When I query for page 1 and want to get 100 results per page of available Thoth container images on User API
         Then I should get "<container_image>" Thoth container image available in the User API response
 
         Examples: Indexes
@@ -11,5 +11,9 @@ Feature: Thoth container images
 
     Scenario: Querying for number of Thoth container images
         Given deployment is accessible using HTTPS
-        When I query for the list of available Thoth container images on User API
-        Then I should see 4 Thoth container images available
+        When I query for page 1 and want to get 100 results per page of available Thoth container images on User API
+        Then I should see at least 55 Thoth container images available
+
+        Given deployment is accessible using HTTPS
+        When I query for page 17 and want to get 100 results per page of available Thoth container images on User API
+        Then I should get a 404 and be ok with that.
