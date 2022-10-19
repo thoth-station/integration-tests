@@ -1,4 +1,15 @@
 
+## Release 0.11.4 (2022-10-19T10:55:23)
+* 8dbc053 :sparkles: modify container image feature to check for 404, see #348
+* 4d1754a :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* 9fb7d92 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* 9675a14 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* 02e2101 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
+* e1c6e58 :ship: Bump up base image initialized in CI.
+* cff14f6 :ship: Bump up base image initialized in CI.
+* b1892f3 :arrow_up: bounce versions of ci/cd config
+* 7ce6557 added some test cases
+
 ## Release 0.11.3 (2022-08-09T07:00:19)
 * 5db65e4 :ship: Bump up base image initialized in CI. (#332)
 * e400b44 :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
