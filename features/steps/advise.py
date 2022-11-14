@@ -191,6 +191,23 @@ def adviser_result_has_pinned_down_software_stack(context):
     ), f"Report should contain score information for {context.analysis_id}"
 
 
+@then("software stack contains packages from specified indexes")
+def software_stack_contains_packages_from_indexes(context):
+    """Check if the packages in the pinned stack are from configured indexes."""
+    assert (
+        context.adviser_result["result"]["report"]["products"][0]["project"]["requirements_locked"]["default"]["flask"][
+            "index"
+        ]
+        == "pypi"
+    )
+    assert (
+        context.adviser_result["result"]["report"]["products"][0]["project"]["requirements_locked"]["default"][
+            "tensorflow"
+        ]["index"]
+        == "tensorflow"
+    )
+
+
 @then("I should be able to access adviser logs")
 def step_impl(context):
     """Access adviser logs."""
