@@ -1,16 +1,16 @@
 [[source]]
 url = "https://pypi.org/simple"
 verify_ssl = true
-name = "pypi"
+name = "pypi-org-simple"
 
 [[source]]
-url = "https://download.pytorch.org/whl/cu113"
+url = "https://download.pytorch.org/whl/cpu"
 verify_ssl = true
-name = "pytorch"
+name = "download-pytorch-org-whl-cpu"
 
 [packages]
-tensorflow = {version="*", index="pytorch"}
-flask = {version="*", index="pypi"}
+torch = {version="*", index="download-pytorch-org-whl-cpu"}
+numpy = {version="*", index="pypi-org-simple"}
 
 [dev-packages]
 

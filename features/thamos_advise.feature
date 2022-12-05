@@ -52,4 +52,4 @@ Feature: Running thamos advise against deployment
 
         Examples: Advise
             | case                      |  recommendation_type    |  os_name  | os_version  | python_version |
-            | cross_index_tensorflow    |  LATEST                 |   rhel    |    8        | 3.8            |
+            | cross_index_tensorflow    |  LATEST                 |   ubi     |    8        | 3.8            |

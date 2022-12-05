@@ -195,16 +195,16 @@ def adviser_result_has_pinned_down_software_stack(context):
 def software_stack_contains_packages_from_indexes(context):
     """Check if the packages in the pinned stack are from configured indexes."""
     assert (
-        context.adviser_result["result"]["report"]["products"][0]["project"]["requirements_locked"]["default"]["flask"][
+        context.adviser_result["result"]["report"]["products"][0]["project"]["requirements_locked"]["default"]["numpy"][
             "index"
         ]
-        == "pypi"
+        == "pypi-org-simple"
     )
     assert (
-        context.adviser_result["result"]["report"]["products"][0]["project"]["requirements_locked"]["default"][
-            "tensorflow"
-        ]["index"]
-        == "tensorflow"
+        context.adviser_result["result"]["report"]["products"][0]["project"]["requirements_locked"]["default"]["torch"][
+            "index"
+        ]
+        == "download-pytorch-org-whl-cpu"
     )
 
 
