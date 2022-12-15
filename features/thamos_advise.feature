@@ -39,3 +39,17 @@ Feature: Running thamos advise against deployment
             | https://github.com/thoth-station/ps-nlp                              | ps-nlp-tensorflow       | without     | without         |
             | https://github.com/thoth-station/ps-nlp                              | ps-nlp-pytorch          | without     | without         |
             | https://github.com/thoth-station/ps-nlp                              | ps-nlp-tensorflow-gpu   | without     | without         |
+
+    @seizes_backend_namespace
+    Scenario Outline: Solve a software stack with strict index configuration
+        Given deployment is accessible using HTTPS
+        When thamos advise is run for <case> for recommendation type <recommendation_type> for <os_name>:<os_version> Python <python_version> asynchronously
+        Then wait for adviser to finish successfully
+        Then I should be able to retrieve adviser results
+        Then adviser result has pinned down software stack with report
+        Then software stack contains packages from specified indexes
+        Then I should be able to access adviser logs
+
+        Examples: Advise
+            | case                      |  recommendation_type    |  os_name  | os_version  | python_version |
+            | cross_index_tensorflow    |  LATEST                 |   ubi     |    8        | 3.8            |

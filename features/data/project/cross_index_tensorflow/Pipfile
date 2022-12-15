@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi-org-simple"
+
+[[source]]
+url = "https://download.pytorch.org/whl/cpu"
+verify_ssl = true
+name = "download-pytorch-org-whl-cpu"
+
+[packages]
+torch = {version="*", index="download-pytorch-org-whl-cpu"}
+numpy = {version="*", index="pypi-org-simple"}
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"
+
+[thoth]
+disable_index_adjustment = true
