@@ -29,7 +29,7 @@ import smtplib
 import sys
 import shutil
 
-__version__ = "0.11.4"
+__version__ = "0.11.5"
 
 _BEHAVE_REPORT_FILE = "behave-report.html"
 _DEPLOYMENT_NAME = os.getenv("THOTH_DEPLOYMENT_NAME", "N/A")

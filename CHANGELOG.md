@@ -1,4 +1,10 @@
 
+## Release 0.11.5 (2022-12-15T08:29:40)
+* 69588bf ':arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment'
+* 63b0989 ':arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment' (#357)
+* 4f12602 :ship: Bump up base image initialized in CI. (#356)
+* 862db81 git ls-files -z -- .pre-commit-config.yaml | xargs -0 sed -i 's#https://gitlab.com/PyCQA/flake8#https://github.com/PyCQA/flake8#' (#355)
+
 ## Release 0.11.4 (2022-10-19T10:55:23)
 * 8dbc053 :sparkles: modify container image feature to check for 404, see #348
 * 4d1754a :arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment
