@@ -1,0 +1,11 @@
+amun
+behave
+behave-html-formatter==0.9.7
+gitpython
+pyhamcrest
+pytoml
+pyyaml
+requests
+thamos
+thoth-common
+thoth-storages
