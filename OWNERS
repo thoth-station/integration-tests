@@ -4,11 +4,10 @@ approvers:
   - codificat
   - goern
   - harshad16
-  - mayacostantini
 
 reviewers:
   - kpostoffice
-  - mayacostantini
 
 emeritus_approvers:
   - fridex  # 2022 Jun
+  - mayacostantini # 2023 Jan
