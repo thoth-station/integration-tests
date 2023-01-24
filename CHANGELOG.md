@@ -1,3 +1,16 @@
+## Release 0.11.5 (2023-01-23T10:55:23)
+* 041ab9e :tada: thanks for all the work
+* f7ceacc :arrow_up: update pre-commit hooks
+* e9c6b54 :arrow_up: manually update Pipfile.lock, related to #363
+* 86e22ff ':arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment'
+* 434e85a :pushpin: Pinned behave-html-formatter to v0.9.7 for rendering in gmail
+* 69588bf ':arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment'
+* f6edffe Change packages to resolve to match database content
+* 63b0989 ':arrow_up: Automatic update of dependencies by Kebechet for the ubi8 environment' (#357)
+* 4f12602 :ship: Bump up base image initialized in CI. (#356)
+* 862db81 Fix pre-commit issues (#355)
+* a43fe41 :ship: Bump up base image initialized in CI.
+* 622cd53 Test strict index configuration
 
 ## Release 0.11.4 (2022-10-19T10:55:23)
 * 8dbc053 :sparkles: modify container image feature to check for 404, see #348
